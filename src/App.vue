@@ -1,34 +1,39 @@
-<script setup>
-import HomePage from './components/HomePage.vue';
+<script>
+import TheNavigation from '@/components/TheNavigation.vue'
+
+export default{
+  components: {TheNavigation}
+}
 </script>
 
 <template>
   <header>
     <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
 
-    <!-- <div class="wrapper">
-      <HomePage/>
-    </div> -->
-  </header>
-  <router-view></router-view> <!-- makes the pages visible -->
-  
-  <router-link to="/">Home</router-link>
-  <router-link to="/game">Game</router-link>
+    <div class = "container"> <!-- possibly delete because don't want header links -->
+      <router-view></router-view> <!-- makes the pages visible -->
+    </div>
 
-  <main></main>
+  </header>
+  
+  
+  <main>
+    <TheNavigation/>
+
+  </main>
 </template>
 
 <style scoped>
-header {
+/* header {
   line-height: 1.5;
 }
 
 .logo {
   display: block;
   margin: 0 auto 2rem;
-}
+} */
 
-@media (min-width: 1024px) {
+/* @media (min-width: 1024px) {
   header {
     display: flex;
     place-items: center;
@@ -44,5 +49,5 @@ header {
     place-items: flex-start;
     flex-wrap: wrap;
   }
-}
+} */
 </style>
