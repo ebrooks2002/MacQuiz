@@ -1,19 +1,23 @@
-<script setup>
-defineProps({
-  msg: {
-    type: String,
-    required: true
+<script>
+  export default {
+    data () {
+      return{
+        // variables
+      }
+    },
+    methods: {
+      //
+    }
   }
-})
 </script>
 
 <template>
   <div class="greetings">
-    <h1 class="green">{{ msg }}</h1>
+    <h1 class="green">{{ "Mac Quiz" }}</h1>
     <h3>
-      Welcom to the newest Macalester game.
+      Welcome to the newest Macalester game.
     </h3>
-    <button>Play the Game!</button>
+    <button @click="">Play the Game!</button>
   </div>
 </template>
 

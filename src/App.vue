@@ -6,10 +6,14 @@ import HomePage from './components/HomePage.vue';
   <header>
     <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
 
-    <div class="wrapper">
-      <HomePage msg="Mac Quiz" />
-    </div>
+    <!-- <div class="wrapper">
+      <HomePage/>
+    </div> -->
   </header>
+  <router-view></router-view> <!-- makes the pages visible -->
+  
+  <router-link to="/">Home</router-link>
+  <router-link to="/game">Game</router-link>
 
   <main></main>
 </template>
