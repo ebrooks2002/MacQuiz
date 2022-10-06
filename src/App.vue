@@ -7,23 +7,21 @@ export default{
 </script>
 
 <template>
+  <main> <!-- the nav bar (delete?)-->
+    <TheNavigation/>
+  </main>
+  
   <header>
     <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class = "container"> <!-- possibly delete because don't want header links -->
-      <router-view></router-view> <!-- makes the pages visible -->
-    </div>
-
   </header>
   
+  <div class = "container">
+    <router-view></router-view> <!-- makes the pages visible -->
+  </div>
   
-  <main>
-    <TheNavigation/>
-
-  </main>
 </template>
 
-<style scoped>
+<style>
 /* header {
   line-height: 1.5;
 }

@@ -4,7 +4,7 @@
 </div>
 <div class="container">
     <div class = "flexBox" id="image">
-        <img src="images/campus-test.jpg">
+        <img src="@/assets/images/campus-test.jpg">
     </div>
     <div class = "flexBox" id="options">
         <div id="info" >
