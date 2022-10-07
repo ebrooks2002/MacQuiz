@@ -4,7 +4,7 @@
 </div>
 <div class="container">
     <div class = "flexBox" id="image">
-        <img src="@/assets/images/campus-test.jpg">
+        <img :src="image">
     </div>
     <div class = "flexBox" id="options">
         <div id="info" >
@@ -22,7 +22,6 @@
 </div>
 </template>
 <script>
-import { createApp } from 'vue'
 export default {
   data() {
     return {
@@ -38,7 +37,8 @@ export default {
           "Campus Center",
           "Janet Wallace",
           "Leonard Center"
-      ]
+      ],
+      image: this.randomImg()
     }
   },
   methods: {
@@ -49,13 +49,19 @@ export default {
       let index = Math.floor(Math.random() * this.places.length)
       return this.places[index]
     },
-
+    randomImg: function() {
+      let index = Math.floor(Math.random() * (2 - 1 + 1) + 1)
+      let path = "src/assets/images/campus-test"
+      let img = path + index + ".jpg"
+      return img
+    },
     nextClick: function() {
       this.toggleDisplay()
       this.options[0] = this.randomOption()
       this.options[1] = this.randomOption()
       this.options[2] = this.randomOption()
       this.options[3] = this.randomOption()
+      this.image = this.randomImg()
 
     }
   }
