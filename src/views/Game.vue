@@ -15,7 +15,7 @@
             <button id="option1" v-on:click="toggleDisplay()" class="optionBtn">{{ options[0] }}</button>
             <button id="option2" v-on:click="toggleDisplay()" class="optionBtn">{{ options[1] }}</button>
             <button id="option3" v-on:click="toggleDisplay()" class="optionBtn">{{ options[2] }}</button>
-            <button id="option4" v-on:click="toggleDisplay()" class="optionBtn">{{ options[3] }}</button>
+            <button id="option4" v-on:click="toggleDisplay()" class="optionBtn">{{ correctAns }}</button>
     </div>
     <button v-if="display" v-on:click="nextClick()" id="next"> Next</button>
 
@@ -38,7 +38,15 @@ export default {
           "Janet Wallace",
           "Leonard Center"
       ],
-      image: this.randomImg()
+      imageArr: this.randomImg(),
+    }
+  },
+  computed:{
+    image() {
+      return this.imageArr[0]
+    },
+    correctAns(){
+      return this.imageArr[1]
     }
   },
   methods: {
@@ -53,7 +61,8 @@ export default {
       let index = Math.floor(Math.random() * (2 - 1 + 1) + 1)
       let path = "src/assets/images/campus-test"
       let img = path + index + ".jpg"
-      return img
+      let correctAns = img.slice(18, 29)
+      return [img, correctAns]
     },
     nextClick: function() {
       this.toggleDisplay()
@@ -62,25 +71,11 @@ export default {
       this.options[2] = this.randomOption()
       this.options[3] = this.randomOption()
       this.image = this.randomImg()
+      console.log(this.imageArr[0])
+    },
 
-    }
   }
 }
-
-// const app = createApp({
-//   el: 'option1',
-//
-//   data: {
-//     return{
-//       display: false,
-//     }
-//   },
-//     methods: {
-//       optionBtn: function() {
-//         document.getElementById("next").display = "block"
-//       }
-//     }
-//   })
 </script>
 
 <style scoped>
