@@ -8,13 +8,13 @@ export default{
 </script>
 
 <template>
-  <!-- https://forum.vuejs.org/t/how-to-set-the-height-and-width-of-the-router-view-in-app-vue/102260 -->
-  <div id="nav"> <!-- the nav bar -->
-    <TheNavigation/>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-  </div>
+  <main> <!-- the nav bar (delete?)-->
+    <!-- <TheNavigation/> -->
+  </main>
   
-  <header></header>
+  <!-- <header>
+    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+  </header> -->
   
   <div class = "container">
     <router-view/> <!-- makes the pages visible -->

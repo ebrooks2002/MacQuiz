@@ -23,10 +23,11 @@ export default {
 </template>
 
 <style>
+    body{background-color:#d9ecff;}
 
     button{
         border-radius: 10px;
-        background-color: white;
+        background-color: rgb(255, 255, 255);
         width: 150px;
         background-color: #01426A;
         height: 50px;
