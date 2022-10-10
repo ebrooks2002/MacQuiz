@@ -11,7 +11,6 @@
             Score:1
             <div id="timer"></div>
         </div>
-
             <button id="option1" v-on:click="toggleDisplay()" class="optionBtn">{{ options[0] }}</button>
             <button id="option2" v-on:click="toggleDisplay()" class="optionBtn">{{ options[1] }}</button>
             <button id="option3" v-on:click="toggleDisplay()" class="optionBtn">{{ options[2] }}</button>
@@ -79,14 +78,16 @@ export default {
 </script>
 
 <style scoped>
-      
-      
+
     .navBar{
         text-align: left;
         background-color: #01426a;
         top: 100%;
-        color: white;
+        color: rgb(184, 184, 184);
         padding: 5px;
+        border-radius: 5px;
+        min-height: 30px;
+        
     }
     #homeBtn{
         text-decoration: none;
@@ -94,8 +95,9 @@ export default {
 
     }
     .container{
+        margin-top: 50px;
         display: flex;
-        margin: auto;
+        
     }
     .flexBox{
         height: 600px;
@@ -103,22 +105,27 @@ export default {
         margin: auto;
         margin-top: 20px;
         text-align: center;
+        padding: 10px
     }
     #info{
         width: 100%;
-        padding-top: 25px;
+        padding-top: auto ;
         height: 70px;
         box-sizing: border-box;
+        font-size: 57px;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
     }
     #image{
         clear: both;
         margin-right: 2px;
-        background-color: #D44420;
+        background-color: #c28475;
         text-align: center;
         font-size: 20px;
         height: 600px;
         margin-top: 0px;
         overflow: hidden;
+        border-radius: 7%;
+        padding: 40px;
     }
     img{
         width: auto;
@@ -128,7 +135,7 @@ export default {
         margin-left: 2px;
         display: flex;
         flex-wrap: wrap;
-      align-content: stretch;
+        align-content: stretch;
     }
     button{
         border-radius: 10px;
@@ -138,6 +145,7 @@ export default {
         margin-left: 7px;
         margin-right: 7px;
         box-sizing: border-box;
+        font-size: 41px;
 
     }
     button:hover{
