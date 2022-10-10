@@ -157,8 +157,10 @@ export default {
   margin: auto;
   margin-top: 20px;
   text-align: center;
-  padding: 10px
+  padding: 20px;
+  border-radius: 5%;
 }
+
 #info{
   width: 100%;
   padding-top: auto ;
@@ -176,12 +178,16 @@ export default {
   height: 600px;
   margin-top: 0px;
   overflow: hidden;
-  border-radius: 7%;
-  padding: 40px;
+  padding: 0px;
+  border-style: inset;
+  border-width: 3px;
+  border-color: #2e0b29;
+
 }
 img{
   width: auto;
   height: 100%;
+  display: block;
 }
 #options{
   margin-left: 2px;
@@ -198,7 +204,23 @@ button{
   margin-right: 7px;
   box-sizing: border-box;
   font-size: 41px;
+  border-style: dashed;
+  border-color: rgba(252, 39, 92, 0.221);
+  border-width: 3px;
+  animation-name: btnAnime;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
 }
+
+@keyframes btnAnime{
+  0% {border-color:aqua;}
+  25% {border-color: rgb(68, 255, 118);}
+  50% {border-color: rgb(219, 192, 19);}
+  75%{border-color: #ff891b;}
+  100% {border-color: #2e0b29;}
+
+}
+
 button:hover{
   background-color: #A5adaf;
 }

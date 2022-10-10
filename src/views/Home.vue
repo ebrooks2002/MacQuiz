@@ -25,6 +25,13 @@ export default {
 <style>
     body{background-color:#d9ecff;}
 
+    .home{
+        text-align: center;
+        font-family: "Trebuchet MS";
+        font-style: unset;
+        font-size: larger;
+    }
+
     button{
         border-radius: 10px;
         background-color: rgb(255, 255, 255);
