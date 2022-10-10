@@ -22,6 +22,7 @@
 </template>
 
 <script>
+const TOTAL_NUM_PICS = 8
 export default {
   data() {
     return {
@@ -81,8 +82,8 @@ export default {
       return arr
     },
     randomImg: function() {
-      let index = Math.floor(Math.random() * (2 - 1 + 1) + 1)
-      let path = "src/assets/images/campus-test"
+      let index = Math.floor(Math.random() * TOTAL_NUM_PICS)
+      let path = "src/assets/images/"
       let img = path + index + ".jpg"
       return img
     },
@@ -100,7 +101,30 @@ export default {
       this.image = this.randomImg()
     },
     correctAnswer: function() {
-      return this.image.slice(18, 29)
+      if (this.image.slice(18, this.image.length-4 == 0)){
+        return "Carnegie"
+      }
+      if (this.image.slice(18, this.image.length-4 == 1)){
+        return "Dupre"
+      }
+      if (this.image.slice(18, this.image.length-4 == 2)){
+        return "Janet Wallace"
+      }
+      if (this.image.slice(18, this.image.length-4 == 3)){
+        return "Kagin"
+      }
+      if (this.image.slice(18, this.image.length-4 == 4)){
+        return "Leonard Center"
+      }
+      if (this.image.slice(18, this.image.length-4 == 5)){
+        return "Old Main"
+      }
+      if (this.image.slice(18, this.image.length-4 == 6)){
+        return "Olin Rice"
+      }
+      if (this.image.slice(18, this.image.length-4 == 7)){
+        return "Weyerhauser"
+      }
     }
   }
 }
@@ -108,79 +132,6 @@ export default {
 </script>
 
 <style scoped>
-<<<<<<< HEAD
-    
-    .navBar{
-        text-align: left;
-        background-color: #01426a;
-        top: 100%;
-        color: white;
-        padding: 5px;
-    }
-    #homeBtn{
-        text-decoration: none;
-        color: white;
-
-    }
-    .container{
-        display: flex;
-        margin: auto;
-    }
-    .flexBox{
-        height: 600px;
-        width: 500px;
-        margin: auto;
-        margin-top: 20px;
-        text-align: center;
-    }
-    #info{
-        width: 100%;
-        padding-top: 25px;
-        height: 70px;
-        box-sizing: border-box;
-    }
-    #image{
-        clear: both;
-        margin-right: 2px;
-        background-color: #D44420;
-        text-align: center;
-        font-size: 20px;
-        height: 600px;
-        margin-top: 0px;
-        overflow: hidden;
-    }
-    img{
-        width: auto;
-        height: 100%;
-    }
-    #options{
-        margin-left: 2px;
-        display: flex;
-        flex-wrap: wrap;
-      align-content: stretch;
-    }
-    button{
-        border-radius: 10px;
-        width: 200px;
-        background-color: #01426a;
-        height: 200px;
-        margin-left: 7px;
-        margin-right: 7px;
-        box-sizing: border-box;
-
-    }
-    button:hover{
-        background-color: #A5adaf;
-    }
-
-    #next{
-        background-color: #D44420;
-        position: absolute;
-        bottom: 0;
-        right: 0;
-    }
-
-=======
 .navBar{
   text-align: left;
   background-color: #01426a;
@@ -257,5 +208,4 @@ button:hover{
   bottom: 0;
   right: 0;
 }
->>>>>>> e2d1b1d94547e6ca681571fc27f4b4ebc3d04288
 </style>
