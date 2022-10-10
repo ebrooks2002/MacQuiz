@@ -21,6 +21,7 @@
 
 </div>
 </template>
+
 <script>
 export default {
   data() {
@@ -84,8 +85,7 @@ export default {
 </script>
 
 <style scoped>
-      
-      
+    
     .navBar{
         text-align: left;
         background-color: #01426a;
@@ -155,7 +155,5 @@ export default {
         bottom: 0;
         right: 0;
     }
-
-
 
 </style>
