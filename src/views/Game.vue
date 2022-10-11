@@ -23,7 +23,7 @@
 </template>
 <script>
 import  VButton from "./components/VButton.vue";
-
+const TOTAL_NUM_PICS = 8
 export default {
   components: {
     "v-button":VButton
@@ -64,10 +64,6 @@ export default {
   },
   mounted() {
     this.image = this.randomImg()
-    // this.options[0] = this.randomOption()
-    // this.options[1] = this.randomOption()
-    // this.options[2] = this.randomOption()
-    // this.options[3] = this.randomOption()
     this.options[0], this.options[1],this.options[2], this.options[3] = this.randomOption2()
     this.places =[
       "Olin-Rice",
@@ -105,8 +101,8 @@ export default {
       return arr
     },
     randomImg: function() {
-      let index = Math.floor(Math.random() * (2 - 1 + 1) + 1)
-      let path = "src/assets/images/campus-test"
+      let index = Math.floor(Math.random() * TOTAL_NUM_PICS)
+      let path = "src/assets/images/"
       let img = path + index + ".jpg"
       return img
     },
@@ -123,8 +119,31 @@ export default {
       this.image = this.randomImg()
     },
     correctAnswer: function() {
-      return this.image.slice(18, 29)
-    },
+        if (this.image.slice(18, this.image.length-5 == 0)){
+          return "Carnegie"
+        }
+        if (this.image.slice(18, this.image.length-5 == 1)){
+          return "Dupre"
+        }
+        if (this.image.slice(18, this.image.length-5 == 2)){
+          return "Janet Wallace"
+        }
+        if (this.image.slice(18, this.image.length-5 == 3)){
+          return "Kagin"
+        }
+        if (this.image.slice(18, this.image.length-5 == 4)){
+          return "Leonard Center"
+        }
+        if (this.image.slice(18, this.image.length-5 == 5)){
+          return "Old Main"
+        }
+        if (this.image.slice(18, this.image.length-5 == 6)){
+          return "Olin Rice"
+        }
+        if (this.image.slice(18, this.image.length-5 == 7)){
+          return "Weyerhauser"
+        }
+      },
     showCorrectAnswer: function (){
       if (this.options[0] === this.correctAns){
         document.getElementById("option1").className = "correct"
