@@ -1,6 +1,6 @@
 <script>
 import TheNavigation from '@/components/TheNavigation.vue'
-
+// import VButton from "src/views/components/VButton";
 export default{
   components: {TheNavigation}
 }

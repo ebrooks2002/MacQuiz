@@ -8,29 +8,31 @@
     </div>
     <div class = "flexBox" id="options">
       <div id="info" >
-        Score:1
+        Score:{{ score }}
         <div id="timer"></div>
       </div>
-      <button id="option1" v-on:click="toggleDisplay()" class="optionBtn">{{ options[0] }}</button>
-      <button id="option2" v-on:click="toggleDisplay()" class="optionBtn">{{ options[1] }}</button>
-      <button id="option3" v-on:click="toggleDisplay()" class="optionBtn">{{ options[2] }}</button>
-      <button id="option4" v-on:click="toggleDisplay()" class="optionBtn">{{ options[3] }}</button>
+          <v-button id="option1" :onclick ="optionBtn" :option= "options[0]" class="" :disabled="display"></v-button>
+          <v-button id="option2" :onclick="optionBtn"  :option= "options[1]" class="" :disabled="display"></v-button>
+          <v-button id="option3" :onclick="optionBtn"  :option= "options[2]" class="" :disabled="display"></v-button>
+          <v-button id="option4" :onclick="optionBtn"  :option= "options[3]" class="" :disabled="display"></v-button>
+
     </div>
     <button v-if="display" v-on:click="nextClick()" id="next"> Next</button>
 
   </div>
 </template>
 <script>
+import  VButton from "./components/VButton.vue";
+
 export default {
+  components: {
+    "v-button":VButton
+  },
   data() {
     return {
+      score: 0,
       display: false,
-      options: [
-          null,
-          null,
-          null,
-          null
-      ],
+      randomPlaces: null,
       places: [
         "Olin-Rice",
         "Campus Center",
@@ -38,7 +40,26 @@ export default {
         "Leonard Center"
       ],
       image: null,
-      correctAns: null
+      correctAns: null,
+      clickedBtn: null
+
+    }
+  },
+  computed: {
+    options() {
+      let places = this.places
+      let arr = []
+      let i = 0
+      while (arr.length < 4){
+        let index = Math.floor(Math.random() * this.places.length)
+        if (!arr.includes(places[index])){
+          arr[i] = places[index]
+          i++
+        }
+      }
+      let correctIndex = Math.floor(Math.random() * arr.length)
+      arr[correctIndex] = this.correctAns
+      return arr
     }
   },
   mounted() {
@@ -49,21 +70,25 @@ export default {
     // this.options[3] = this.randomOption()
     this.options[0], this.options[1],this.options[2], this.options[3] = this.randomOption2()
     this.places =[
-        "Olin-Rice",
-        "Campus Center",
-        "Janet Wallace",
-        "Leonard Center"
-        ]
+      "Olin-Rice",
+      "Campus Center",
+      "Janet Wallace",
+      "Leonard Center"
+    ]
     this.correctAns = this.correctAnswer()
+    this.randomPlaces = this.randomOption2()
   },
   methods: {
-    toggleDisplay: function() {
+    optionBtn: function(event) {
+      this.showCorrectAnswer()
+
+      this.display = !this.display
+      this.clickedBtn = event.target.id
+      this.checkIfCorrect()
+    },
+    toggleDisplay: function (){
       this.display = !this.display
     },
-    // randomOption: function() {
-    //   let index = Math.floor(Math.random() * this.places.length)
-    //   return this.places[index]
-    // },
     randomOption2: function() {
       let places = this.places
       let arr = []
@@ -87,23 +112,63 @@ export default {
     },
     nextClick: function() {
       this.toggleDisplay()
-      // this.options[0] = this.randomOption()
-      // this.options[1] = this.randomOption()
-      // this.options[2] = this.randomOption()
-      // this.options[3] = this.randomOption()
+      this.resetClasses()
+
       let options = this.randomOption2()
       this.options[0] = options[0]
       this.options[1] = options[1]
       this.options[2] = options[2]
       this.options[3] = options[3]
+      console.log(this.places)
       this.image = this.randomImg()
     },
     correctAnswer: function() {
       return this.image.slice(18, 29)
+    },
+    showCorrectAnswer: function (){
+      if (this.options[0] === this.correctAns){
+        document.getElementById("option1").className = "correct"
+        document.getElementById("option2").className = "incorrect"
+        document.getElementById("option3").className = "incorrect"
+        document.getElementById("option4").className = "incorrect"
+
+      }
+     else if (this.options[1] === this.correctAns){
+        document.getElementById("option2").className = "correct"
+        document.getElementById("option1").className = "incorrect"
+        document.getElementById("option3").className = "incorrect"
+        document.getElementById("option4").className = "incorrect"
+      }
+      else if (this.options[2] === this.correctAns){
+        document.getElementById("option3").className = "correct"
+        document.getElementById("option2").className = "incorrect"
+        document.getElementById("option1").className = "incorrect"
+        document.getElementById("option4").className = "incorrect"
+      }
+      else if (this.options[3] === this.correctAns){
+        document.getElementById("option4").className = "correct"
+        document.getElementById("option2").className = "incorrect"
+        document.getElementById("option3").className = "incorrect"
+        document.getElementById("option1").className = "incorrect"
+      }
+
+
+    },
+    resetClasses: function() {
+      document.getElementById("option4").className = ""
+      document.getElementById("option2").className = ""
+      document.getElementById("option3").className = ""
+      document.getElementById("option1").className = ""
+    },
+
+  checkIfCorrect: function () {
+    let btn = document.getElementById(this.clickedBtn)
+    if (btn.className === 'correct') {
+      this.score++
     }
   }
+  }
 }
-
 </script>
 
 <style scoped>
@@ -115,7 +180,6 @@ export default {
   padding: 5px;
   border-radius: 5px;
   min-height: 30px;
-
 }
 #homeBtn{
   text-decoration: none;
@@ -124,7 +188,6 @@ export default {
 .container{
   margin-top: 50px;
   display: flex;
-
 }
 .flexBox{
   height: 600px;
@@ -174,13 +237,14 @@ button{
   box-sizing: border-box;
   font-size: 41px;
 }
-button:hover{
-  background-color: #A5adaf;
-}
+/*button:hover{*/
+/*  background-color: #A5adaf;*/
+/*}*/
 #next{
   background-color: #D44420;
   position: absolute;
   bottom: 0;
   right: 0;
 }
+
 </style>
