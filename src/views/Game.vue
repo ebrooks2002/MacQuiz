@@ -228,16 +228,18 @@ export default {
   padding: 0;
 }
 .container{
+  justify-content: center;
   margin-top: 50px;
   display: flex;
+  margin-left: 50px;
+  margin-right: 50px;
 }
 .flexBox{
   height: 600px;
   width: 500px;
-  margin: auto;
   margin-top: 20px;
   text-align: center;
-  padding: 10px
+  padding: 5px
 }
 #info{
   width: 100%;
@@ -251,12 +253,10 @@ export default {
   clear: both;
   margin-right: 2px;
   margin-top: 0px;
-  margin-left: 10vw;
   background-color: #c28475;
   text-align: center;
   font-size: 20px;
   height: 600px;
-  
   overflow: hidden;
   border-radius: 7%;
   padding: 0px;
@@ -270,20 +270,18 @@ img{
   height: 100%;
 }
 #options{
-  margin-left: 2px;
+  margin-left: 0;
   display: flex;
   flex-wrap: wrap;
   align-content: stretch;
-  margin-right: 5vw;
 }
 button{
-  width: 25vmin;
+  width: 20vmax;
   background-color: #01426a;
-  height: 25vmin;
-  max-width: 195px;
-  max-height: 195px;
-  margin-left: 3vw;
-  margin-right: 0;
+  height: 20vmax;
+  max-width: 200px;
+  max-height: 200px;
+  margin-left: 20px;
   box-sizing: border-box;
   font-size: 3.2vmin;
   font-family: 'Trebuchet MS','Gill Sans', 'Gill Sans MT', Calibri,  sans-serif;
