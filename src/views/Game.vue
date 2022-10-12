@@ -11,10 +11,10 @@
         Score:{{ score }}
         <div id="timer"></div>
       </div>
-          <v-button id="option1" :onclick ="optionBtn" :option= "options[0]" class="" :disabled="display"></v-button>
-          <v-button id="option2" :onclick="optionBtn"  :option= "options[1]" class="" :disabled="display"></v-button>
-          <v-button id="option3" :onclick="optionBtn"  :option= "options[2]" class="" :disabled="display"></v-button>
-          <v-button id="option4" :onclick="optionBtn"  :option= "options[3]" class="" :disabled="display"></v-button>
+      <v-button id="option1" :onclick ="optionBtn" :option= "options[0]" class="" :disabled="display"></v-button>
+      <v-button id="option2" :onclick="optionBtn"  :option= "options[1]" class="" :disabled="display"></v-button>
+      <v-button id="option3" :onclick="optionBtn"  :option= "options[2]" class="" :disabled="display"></v-button>
+      <v-button id="option4" :onclick="optionBtn"  :option= "options[3]" class="" :disabled="display"></v-button>
 
     </div>
     <button v-if="display" v-on:click="nextClick()" id="next"> Next</button>
@@ -37,12 +37,16 @@ export default {
         "Olin-Rice",
         "Campus Center",
         "Janet Wallace",
-        "Leonard Center"
+        "Leonard Center",
+        "Old Main",
+        "Carnegie",
+        "Dupre",
+        "Kagin",
+        "Weyerhauser"
       ],
       image: null,
       correctAns: null,
       clickedBtn: null
-
     }
   },
   computed: {
@@ -52,7 +56,7 @@ export default {
       let i = 0
       while (arr.length < 4){
         let index = Math.floor(Math.random() * this.places.length)
-        if (!arr.includes(places[index])){
+        if (!arr.includes(places[index])  && places[index] !== this.correctAns){
           arr[i] = places[index]
           i++
         }
@@ -69,7 +73,8 @@ export default {
       "Olin-Rice",
       "Campus Center",
       "Janet Wallace",
-      "Leonard Center"
+      "Leonard Center",
+      "Old Main"
     ]
     this.correctAns = this.correctAnswer()
     this.randomPlaces = this.randomOption2()
@@ -78,7 +83,6 @@ export default {
     optionBtn: function(event) {
       console.log(this.correctAns)
       this.showCorrectAnswer()
-
       this.display = !this.display
       this.clickedBtn = event.target.id
       this.checkIfCorrect()
@@ -121,56 +125,47 @@ export default {
     },
     correctAnswer: function() {
       console.log("In if")
-
       if (this.image.slice(18, this.image.length-4) === '0'){
-          console.log("In if")
-          return "Carnegie"
-        }
-        if (this.image.slice(18, this.image.length-4) === '1'){
-          console.log("In if")
-
-          return "Dupre"
-        }
-        if (this.image.slice(18, this.image.length-4) === '2'){
-          console.log("In if")
-
-          return "Janet Wallace"
-        }
-        if (this.image.slice(18, this.image.length-4) === '3'){
-          console.log("In if")
-
-          return "Kagin"
-        }
-        if (this.image.slice(18, this.image.length-4) === '4'){
-          console.log("In if")
-
-          return "Leonard Center"
-        }
-        if (this.image.slice(18, this.image.length-4) === '5'){
-          console.log("In if")
-
-          return "Old Main"
-        }
-        if (this.image.slice(18, this.image.length-4) === '6'){
-          console.log("In if")
-
-          return "Olin-Rice"
-        }
-        if (this.image.slice(18, this.image.length-4) === '7'){
-          console.log("In if")
-
-          return "Weyerhauser"
-        }
-      },
+        console.log("In if")
+        return "Carnegie"
+      }
+      if (this.image.slice(18, this.image.length-4) === '1'){
+        console.log("In if")
+        return "Dupre"
+      }
+      if (this.image.slice(18, this.image.length-4) === '2'){
+        console.log("In if")
+        return "Janet Wallace"
+      }
+      if (this.image.slice(18, this.image.length-4) === '3'){
+        console.log("In if")
+        return "Kagin"
+      }
+      if (this.image.slice(18, this.image.length-4) === '4'){
+        console.log("In if")
+        return "Leonard Center"
+      }
+      if (this.image.slice(18, this.image.length-4) === '5'){
+        console.log("In if")
+        return "Old Main"
+      }
+      if (this.image.slice(18, this.image.length-4) === '6'){
+        console.log("In if")
+        return "Olin-Rice"
+      }
+      if (this.image.slice(18, this.image.length-4) === '7'){
+        console.log("In if")
+        return "Weyerhauser"
+      }
+    },
     showCorrectAnswer: function (){
       if (this.options[0] === this.correctAns){
         document.getElementById("option1").className = "correct"
         document.getElementById("option2").className = "incorrect"
         document.getElementById("option3").className = "incorrect"
         document.getElementById("option4").className = "incorrect"
-
       }
-     else if (this.options[1] === this.correctAns){
+      else if (this.options[1] === this.correctAns){
         document.getElementById("option2").className = "correct"
         document.getElementById("option1").className = "incorrect"
         document.getElementById("option3").className = "incorrect"
@@ -188,8 +183,6 @@ export default {
         document.getElementById("option3").className = "incorrect"
         document.getElementById("option1").className = "incorrect"
       }
-
-
     },
     resetClasses: function() {
       document.getElementById("option4").className = ""
@@ -197,13 +190,12 @@ export default {
       document.getElementById("option3").className = ""
       document.getElementById("option1").className = ""
     },
-
-  checkIfCorrect: function () {
-    let btn = document.getElementById(this.clickedBtn)
-    if (btn.className === 'correct') {
-      this.score++
+    checkIfCorrect: function () {
+      let btn = document.getElementById(this.clickedBtn)
+      if (btn.className === 'correct') {
+        this.score++
+      }
     }
-  }
   }
 }
 </script>
@@ -243,16 +235,20 @@ export default {
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
 }
 #image{
-  clear: both;
+clear: both;
   margin-right: 2px;
+  margin-top: 0px;
   background-color: #c28475;
   text-align: center;
   font-size: 20px;
   height: 600px;
-  margin-top: 0px;
+
   overflow: hidden;
   border-radius: 7%;
-  padding: 40px;
+  padding: 0px;
+  border-style: dashed;
+  border-width: 3px;
+  border-color: rgb(0, 0, 0);
 }
 img{
   width: auto;
@@ -283,5 +279,4 @@ button{
   bottom: 0;
   right: 0;
 }
-
 </style>
