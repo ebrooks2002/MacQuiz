@@ -211,16 +211,21 @@ export default {
 <style scoped>
 .navBar{
   text-align: left;
+  font-size: 3vh;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   background-color: #01426a;
   top: 100%;
   color: rgb(184, 184, 184);
-  padding: 5px;
+  padding: 10px;
   border-radius: 5px;
-  min-height: 30px;
+  min-height: 5vh;
+  
 }
 #homeBtn{
-  text-decoration: none;
-  color: white;
+  text-decoration:none;
+  color: hwb(190 75% 1%);
+  vertical-align: middle;
+  padding: 0;
 }
 .container{
   margin-top: 50px;
@@ -252,7 +257,11 @@ export default {
   margin-top: 0px;
   overflow: hidden;
   border-radius: 7%;
-  padding: 40px;
+  padding: 0px;
+  border-style: dashed;
+  border-width: 3px;
+  border-color: rgb(0, 0, 0);
+
 }
 img{
   width: auto;
@@ -265,14 +274,21 @@ img{
   align-content: stretch;
 }
 button{
-  border-radius: 10px;
-  width: 200px;
+  width: 25vmin;
   background-color: #01426a;
-  height: 200px;
-  margin-left: 7px;
-  margin-right: 7px;
+  height: 25vmin;
+  max-width: 200px;
+  max-height: 200px;
+  margin-left: 3vw;
+  margin-right: 10px;
   box-sizing: border-box;
-  font-size: 41px;
+  font-size: 3.2vmin;
+  font-family: 'Trebuchet MS','Gill Sans', 'Gill Sans MT', Calibri,  sans-serif;
+  border-radius: 15px;
+  border-style: double;
+  border-width: 5px;
+  border-color: rgba(191, 155, 239, 0.554);
+  
 }
 /*button:hover{*/
 /*  background-color: #A5adaf;*/
