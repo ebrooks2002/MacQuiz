@@ -250,11 +250,13 @@ export default {
 #image{
   clear: both;
   margin-right: 2px;
+  margin-top: 0px;
+  margin-left: 10vw;
   background-color: #c28475;
   text-align: center;
   font-size: 20px;
   height: 600px;
-  margin-top: 0px;
+  
   overflow: hidden;
   border-radius: 7%;
   padding: 0px;
@@ -272,15 +274,16 @@ img{
   display: flex;
   flex-wrap: wrap;
   align-content: stretch;
+  margin-right: 5vw;
 }
 button{
   width: 25vmin;
   background-color: #01426a;
   height: 25vmin;
-  max-width: 200px;
-  max-height: 200px;
+  max-width: 195px;
+  max-height: 195px;
   margin-left: 3vw;
-  margin-right: 10px;
+  margin-right: 0;
   box-sizing: border-box;
   font-size: 3.2vmin;
   font-family: 'Trebuchet MS','Gill Sans', 'Gill Sans MT', Calibri,  sans-serif;
