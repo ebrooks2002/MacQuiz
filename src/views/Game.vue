@@ -1,6 +1,6 @@
 <template>
   <div class="navBar">
-    <router-link id="homeBtn" to="/">Mac Quiz</router-link>
+    <router-link id="homeBtn" to="/">FunQuizGame</router-link>
   </div>
   <div class="container">
     <div class = "flexBox" id="image">
@@ -292,7 +292,7 @@ img{
   height: 100%;
 }
 #options{
-  margin-left: 0;
+  margin-left: 10px;
   display: flex;
   flex-wrap: wrap;
   align-content: stretch;
@@ -305,7 +305,7 @@ button{
   max-height: 200px;
   margin-left: 20px;
   box-sizing: border-box;
-  font-size: 3.2vmin;
+  font-size: 3vmin;
   font-family: 'Trebuchet MS','Gill Sans', 'Gill Sans MT', Calibri,  sans-serif;
   border-radius: 15px;
   border-style: double;
