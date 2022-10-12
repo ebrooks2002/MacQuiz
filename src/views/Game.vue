@@ -8,8 +8,10 @@
     </div>
     <div class = "flexBox" id="options">
       <div id="info" >
-        Score:{{ score }}
-        <div id="timer"></div>
+        Score:{{ score }} Time: {{timerCount}}
+<!--        <div id="timer">-->
+<!--          -->
+<!--        </div>-->
       </div>
       <v-button id="option1" :onclick ="optionBtn" :option= "options[0]" class="" :disabled="display"></v-button>
       <v-button id="option2" :onclick="optionBtn"  :option= "options[1]" class="" :disabled="display"></v-button>
@@ -46,8 +48,32 @@ export default {
       ],
       image: null,
       correctAns: null,
-      clickedBtn: null
+      clickedBtn: null,
+      timerCount: 10,
+      stopTimer: false
     }
+  },
+  //Code from https://stackoverflow.com/questions/55773602/how-do-i-create-a-simple-10-seconds-countdown-in-vue-js
+  watch: {
+
+    timerCount: {
+      handler(value) {
+
+        if (value > 0 && !this.stopTimer) {
+          setTimeout(() => {
+            this.timerCount--
+          }, 1000)
+        }else if (value === 0 &!this.stopTimer){
+          setTimeout(() => {
+            this.optionBtn()
+          }, 10)
+        }
+
+
+      },
+      immediate: true // This ensures the watcher is triggered upon creation
+    },
+
   },
   computed: {
     options() {
@@ -85,6 +111,8 @@ export default {
       this.showCorrectAnswer()
       this.display = !this.display
       this.clickedBtn = event.target.id
+      this.stopTimer = true
+      clearInterval(this.timerCount)
       this.checkIfCorrect()
     },
     toggleDisplay: function (){
@@ -122,6 +150,8 @@ export default {
       this.options[1] = options[1]
       this.options[2] = options[2]
       this.options[3] = options[3]
+      this.timerCount = 10
+      this.stopTimer = false
     },
     correctAnswer: function() {
       console.log("In if")
@@ -203,46 +233,53 @@ export default {
 <style scoped>
 .navBar{
   text-align: left;
+  font-size: 3vh;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   background-color: #01426a;
   top: 100%;
   color: rgb(184, 184, 184);
-  padding: 5px;
+  padding: 10px;
   border-radius: 5px;
-  min-height: 30px;
+  min-height: 5vh;
+
 }
 #homeBtn{
-  text-decoration: none;
-  color: white;
+  text-decoration:none;
+  color: hwb(190 75% 1%);
+  vertical-align: middle;
+  padding: 0;
 }
 .container{
+  justify-content: center;
   margin-top: 50px;
   display: flex;
+  margin-left: 50px;
+  margin-right: 50px;
 }
 .flexBox{
   height: 600px;
   width: 500px;
-  margin: auto;
   margin-top: 20px;
   text-align: center;
-  padding: 10px
+  padding: 5px
 }
 #info{
   width: 100%;
   padding-top: auto ;
   height: 70px;
   box-sizing: border-box;
-  font-size: 57px;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+  font-size: 50px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  margin: auto;
 }
 #image{
-clear: both;
+  clear: both;
   margin-right: 2px;
   margin-top: 0px;
   background-color: #c28475;
   text-align: center;
   font-size: 20px;
   height: 600px;
-
   overflow: hidden;
   border-radius: 7%;
   padding: 0px;
@@ -255,20 +292,26 @@ img{
   height: 100%;
 }
 #options{
-  margin-left: 2px;
+  margin-left: 0;
   display: flex;
   flex-wrap: wrap;
   align-content: stretch;
 }
 button{
-  border-radius: 10px;
-  width: 200px;
+  width: 20vmax;
   background-color: #01426a;
-  height: 200px;
-  margin-left: 7px;
-  margin-right: 7px;
+  height: 20vmax;
+  max-width: 200px;
+  max-height: 200px;
+  margin-left: 20px;
   box-sizing: border-box;
-  font-size: 41px;
+  font-size: 3.2vmin;
+  font-family: 'Trebuchet MS','Gill Sans', 'Gill Sans MT', Calibri,  sans-serif;
+  border-radius: 15px;
+  border-style: double;
+  border-width: 5px;
+  border-color: rgba(191, 155, 239, 0.554);
+
 }
 /*button:hover{*/
 /*  background-color: #A5adaf;*/
@@ -279,4 +322,5 @@ button{
   bottom: 0;
   right: 0;
 }
+
 </style>
