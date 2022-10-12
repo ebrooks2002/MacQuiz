@@ -76,6 +76,7 @@ export default {
   },
   methods: {
     optionBtn: function(event) {
+      console.log(this.correctAns)
       this.showCorrectAnswer()
 
       this.display = !this.display
@@ -91,7 +92,7 @@ export default {
       let i = 0
       while (arr.length < 4){
         let index = Math.floor(Math.random() * this.places.length)
-        if (!arr.includes(places[index])){
+        if (!arr.includes(places[index]) && places[index] !== this.correctAns){
           arr[i] = places[index]
           i++
         }
@@ -109,38 +110,55 @@ export default {
     nextClick: function() {
       this.toggleDisplay()
       this.resetClasses()
-
+      console.log(this.places)
+      this.image = this.randomImg()
+      this.correctAns = this.correctAnswer()
       let options = this.randomOption2()
       this.options[0] = options[0]
       this.options[1] = options[1]
       this.options[2] = options[2]
       this.options[3] = options[3]
-      console.log(this.places)
-      this.image = this.randomImg()
     },
     correctAnswer: function() {
-        if (this.image.slice(18, this.image.length-5 == 0)){
+      console.log("In if")
+
+      if (this.image.slice(18, this.image.length-4) === '0'){
+          console.log("In if")
           return "Carnegie"
         }
-        if (this.image.slice(18, this.image.length-5 == 1)){
+        if (this.image.slice(18, this.image.length-4) === '1'){
+          console.log("In if")
+
           return "Dupre"
         }
-        if (this.image.slice(18, this.image.length-5 == 2)){
+        if (this.image.slice(18, this.image.length-4) === '2'){
+          console.log("In if")
+
           return "Janet Wallace"
         }
-        if (this.image.slice(18, this.image.length-5 == 3)){
+        if (this.image.slice(18, this.image.length-4) === '3'){
+          console.log("In if")
+
           return "Kagin"
         }
-        if (this.image.slice(18, this.image.length-5 == 4)){
+        if (this.image.slice(18, this.image.length-4) === '4'){
+          console.log("In if")
+
           return "Leonard Center"
         }
-        if (this.image.slice(18, this.image.length-5 == 5)){
+        if (this.image.slice(18, this.image.length-4) === '5'){
+          console.log("In if")
+
           return "Old Main"
         }
-        if (this.image.slice(18, this.image.length-5 == 6)){
-          return "Olin Rice"
+        if (this.image.slice(18, this.image.length-4) === '6'){
+          console.log("In if")
+
+          return "Olin-Rice"
         }
-        if (this.image.slice(18, this.image.length-5 == 7)){
+        if (this.image.slice(18, this.image.length-4) === '7'){
+          console.log("In if")
+
           return "Weyerhauser"
         }
       },
