@@ -25,6 +25,7 @@
 </template>
 <script>
 import  VButton from "./components/VButton.vue";
+import Timer from "./components/Timer.vue"
 const TOTAL_NUM_PICS = 8
 export default {
   components: {
