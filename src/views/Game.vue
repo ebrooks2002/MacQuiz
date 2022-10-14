@@ -1,6 +1,6 @@
 <template>
   <div class="navBar">
-    <router-link id="homeBtn" to="/">Mac Quiz</router-link>
+    <router-link id="homeBtn" to="/">FunQuizGame</router-link>
   </div>
   <div class="container">
     <div class = "flexBox" id="image">
@@ -293,35 +293,46 @@ img{
   height: 100%;
 }
 #options{
-  margin-left: 0;
+  margin-left: 10px;
   display: flex;
   flex-wrap: wrap;
   align-content: stretch;
 }
 button{
-  width: 20vmax;
+  width: 21vmax;
   background-color: #01426a;
-  height: 20vmax;
-  max-width: 200px;
-  max-height: 200px;
+  height: 21vmax;
+  max-width: 220px;
+  max-height: 220px;
   margin-left: 20px;
   box-sizing: border-box;
-  font-size: 3.2vmin;
+  font-size: 3vmin;
   font-family: 'Trebuchet MS','Gill Sans', 'Gill Sans MT', Calibri,  sans-serif;
   border-radius: 15px;
   border-style: double;
   border-width: 5px;
   border-color: rgba(191, 155, 239, 0.554);
-
+  transition-property: width,height,background-color;
 }
-/*button:hover{*/
-/*  background-color: #A5adaf;*/
-/*}*/
+button:hover{
+ background-color: orange;
+ transition: 0.2s;
+}
 #next{
-  background-color: #D44420;
+  width: 170px;
+  height: 170px;
+  border-style: groove;
+  font-size: 3vw;
+  background-color: #fc6e4aa4;
   position: absolute;
   bottom: 0;
   right: 0;
+  animation: forwards;
+  animation-duration: 2x;
+}
+#next:hover{
+  background-color:orangered;
+  transition: 0.5s;
 }
 
 </style>

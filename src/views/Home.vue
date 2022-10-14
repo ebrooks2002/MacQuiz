@@ -2,13 +2,12 @@
 export default {
 //
 }
+// import 'animate.css';
 </script>
-
 <template>
     <div class = "home">
-        <h1>Home</h1>
-        <h2>Welcome to the best new Macalester game!</h2>
-
+        <h1 >Home</h1>
+        <h2 >Welcome to the best new Macalester game!</h2>
         <!-- https://codingbeautydev.com/blog/vue-router-link-button/ -->
         <router-link
             to="/game"
@@ -41,7 +40,6 @@ export default {
         margin: 7px;
         box-sizing: border-box;
         -webkit-text-fill-color: white;
-
     }
     button:hover{
         background-color: #3d7ba1;
