@@ -3,21 +3,24 @@
     <router-link id="homeBtn" to="/">FunQuizGame</router-link>
   </div>
   <div class="container">
+    <finished
+      v-if="buttonTrigger"
+      :score = "score"
+      :TogglePopup = "resetGame"
+    >
+    </finished>
     <div class = "flexBox" id="image">
       <img :src="image">
     </div>
     <div class = "flexBox" id="options">
       <div id="info" >
-        Score:{{ score }} Time: {{timerCount}}
-<!--        <div id="timer">-->
-<!--          -->
-<!--        </div>-->
+        Score:{{ score }} Points: <span ref="points"> {{timerCount}}</span>
       </div>
       <v-button id="option1" :onclick ="optionBtn" :option= "options[0]" class="" :disabled="display"></v-button>
       <v-button id="option2" :onclick="optionBtn"  :option= "options[1]" class="" :disabled="display"></v-button>
       <v-button id="option3" :onclick="optionBtn"  :option= "options[2]" class="" :disabled="display"></v-button>
       <v-button id="option4" :onclick="optionBtn"  :option= "options[3]" class="" :disabled="display"></v-button>
-
+      <div id = "lives"> lives: {{lives}}</div>
     </div>
     <button v-if="display" v-on:click="nextClick()" id="next"> Next</button>
 
@@ -25,10 +28,13 @@
 </template>
 <script>
 import  VButton from "./components/VButton.vue";
-import Timer from "./components/Timer.vue"
+import Finished from "./components/Finished.vue"
+import { ref } from 'vue';
+
 const TOTAL_NUM_PICS = 8
 export default {
   components: {
+    "finished":Finished,
     "v-button":VButton
   },
   data() {
@@ -50,32 +56,45 @@ export default {
       image: null,
       correctAns: null,
       clickedBtn: null,
-      timerCount: 10,
-      stopTimer: false
+      timerCount: 1000,
+      stopTimer: false,
+      points: 0,
+      timer: null,
+      isRunning: false,
+      lives: 3,
+      buttonTrigger: false
     }
   },
-  //Code from https://stackoverflow.com/questions/55773602/how-do-i-create-a-simple-10-seconds-countdown-in-vue-js
-  watch: {
-
-    timerCount: {
-      handler(value) {
-
-        if (value > 0 && !this.stopTimer) {
-          setTimeout(() => {
+  // setup () {
+  //   const popupTriggers = ref({
+  //     buttonTrigger: false,
+  //     timedTrigger: false
+  //   });
+  //   const TogglePopup = (trigger) => {
+  //       popupTriggers.value[trigger] = !popupTriggers.value[trigger]
+  //   }
+  //   setTimeout(() => {
+  //     popupTriggers.value.timedTrigger = true;
+  //   }, 3000);
+  //   return {
+  //     Finished,
+  //     popupTriggers,
+  //     TogglePopup
+  //   }
+  // },
+  created: function() {
+      this.isRunning = true
+      if (!this.timer) {
+        this.timer = setInterval(() => {
+          if (this.timerCount > 0) {
             this.timerCount--
-          }, 1000)
-        }else if (value === 0 &!this.stopTimer){
-          setTimeout(() => {
+          } else {
+            this.stop()
             this.optionBtn()
-          }, 10)
-        }
-
-
-      },
-      immediate: true // This ensures the watcher is triggered upon creation
+          }
+        }, 10)
+      }
     },
-
-  },
   computed: {
     options() {
       let places = this.places
@@ -107,17 +126,37 @@ export default {
     this.randomPlaces = this.randomOption2()
   },
   methods: {
+    resetGame: function (){
+          this.score = 0
+          this.image = null
+          this.correctAns = null
+          this.clickedBtn = null
+          this.timerCount = 1000
+          this.stopTimer = false
+          this.points = 0
+          this.timer = null
+          this.isRunning = false
+          this.lives = 3
+          this.buttonTrigger = false
+      this.nextClick()
+
+    },
     optionBtn: function(event) {
       console.log(this.correctAns)
       this.showCorrectAnswer()
       this.display = !this.display
       this.clickedBtn = event.target.id
       this.stopTimer = true
-      clearInterval(this.timerCount)
+      this.stop()
       this.checkIfCorrect()
+      if (this.lives <= 0)
+        this.TogglePopup()
     },
     toggleDisplay: function (){
       this.display = !this.display
+    },
+    TogglePopup: function (){
+      this.buttonTrigger = !this.buttonTrigger
     },
     randomOption2: function() {
       let places = this.places
@@ -146,12 +185,13 @@ export default {
       console.log(this.places)
       this.image = this.randomImg()
       this.correctAns = this.correctAnswer()
+      this.start()
       let options = this.randomOption2()
       this.options[0] = options[0]
       this.options[1] = options[1]
       this.options[2] = options[2]
       this.options[3] = options[3]
-      this.timerCount = 10
+      this.timerCount = 1000
       this.stopTimer = false
     },
     correctAnswer: function() {
@@ -224,9 +264,32 @@ export default {
     checkIfCorrect: function () {
       let btn = document.getElementById(this.clickedBtn)
       if (btn.className === 'correct') {
-        this.score++
+        this.score += this.timerCount
       }
-    }
+
+      else
+        this.lives--
+    },
+
+    start() {
+      this.timerCount = 1000
+      this.isRunning = true
+      if (!this.timer) {
+        this.timer = setInterval(() => {
+          if (this.timerCount > 0) {
+            this.timerCount--
+          } else {
+            this.stop()
+            this.optionBtn()
+          }
+        }, 10)
+      }
+    },
+    stop () {
+      this.isRunning = false
+      clearInterval(this.timer)
+      this.timer = null
+    },
   }
 }
 </script>
@@ -269,7 +332,7 @@ export default {
   padding-top: auto ;
   height: 70px;
   box-sizing: border-box;
-  font-size: 50px;
+  font-size: 45px;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   margin: auto;
 }
@@ -333,6 +396,11 @@ button:hover{
 #next:hover{
   background-color:orangered;
   transition: 0.5s;
+}
+
+#lives{
+  margin: auto;
+  font-size: 30px;
 }
 
 </style>
