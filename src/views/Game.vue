@@ -16,10 +16,10 @@
       <div id="info" >
         Score:{{ score }} Points: <span ref="points"> {{timerCount}}</span>
       </div>
-      <v-button id="option1" :onclick ="optionBtn" :option= "options[0]" class="" :disabled="display"></v-button>
-      <v-button id="option2" :onclick="optionBtn"  :option= "options[1]" class="" :disabled="display"></v-button>
-      <v-button id="option3" :onclick="optionBtn"  :option= "options[2]" class="" :disabled="display"></v-button>
-      <v-button id="option4" :onclick="optionBtn"  :option= "options[3]" class="" :disabled="display"></v-button>
+      <v-button id="option1" :onclick ="optionBtn" :option= "options[0]" class="non" :disabled="display"></v-button>
+      <v-button id="option2" :onclick="optionBtn"  :option= "options[1]" class="non" :disabled="display"></v-button>
+      <v-button id="option3" :onclick="optionBtn"  :option= "options[2]" class="non" :disabled="display"></v-button>
+      <v-button id="option4" :onclick="optionBtn"  :option= "options[3]" class="non" :disabled="display"></v-button>
       <div id = "lives"> lives: {{lives}}</div>
     </div>
     <button v-if="display" v-on:click="nextClick()" id="next"> Next</button>
@@ -66,23 +66,6 @@ export default {
       buttonTrigger: false
     }
   },
-  // setup () {
-  //   const popupTriggers = ref({
-  //     buttonTrigger: false,
-  //     timedTrigger: false
-  //   });
-  //   const TogglePopup = (trigger) => {
-  //       popupTriggers.value[trigger] = !popupTriggers.value[trigger]
-  //   }
-  //   setTimeout(() => {
-  //     popupTriggers.value.timedTrigger = true;
-  //   }, 3000);
-  //   return {
-  //     Finished,
-  //     popupTriggers,
-  //     TogglePopup
-  //   }
-  // },
   created: function() {
       this.isRunning = true
       if (!this.timer) {
@@ -163,7 +146,7 @@ export default {
       console.log(this.correctAns)
       this.showCorrectAnswer()
       this.display = !this.display
-      this.clickedBtn = event.target.id
+      this.clickedBtn = (event !== undefined) ? event.target.id:undefined
       this.stopTimer = true
       this.stop()
       this.checkIfCorrect()
@@ -269,19 +252,21 @@ export default {
       }
     },
     resetClasses: function() {
-      document.getElementById("option4").className = ""
-      document.getElementById("option2").className = ""
-      document.getElementById("option3").className = ""
-      document.getElementById("option1").className = ""
+      document.getElementById("option4").className = "non"
+      document.getElementById("option2").className = "non"
+      document.getElementById("option3").className = "non"
+      document.getElementById("option1").className = "non"
     },
     checkIfCorrect: function () {
-      let btn = document.getElementById(this.clickedBtn)
-      if (btn.className === 'correct') {
-        this.score += this.timerCount
-      }
+      if (this.clickedBtn !== undefined) {
 
-      else
-        this.lives--
+        let btn = document.getElementById(this.clickedBtn)
+        if (btn.className === 'correct') {
+          this.score += this.timerCount
+          return
+        }
+      }
+      this.lives--
     },
 
     start() {
@@ -342,7 +327,6 @@ export default {
 }
 #info{
   width: 100%;
-  padding-top: auto ;
   height: 70px;
   box-sizing: border-box;
   font-size: 45px;
@@ -390,10 +374,11 @@ button{
   border-color: rgba(191, 155, 239, 0.554);
   transition-property: width,height,background-color;
 }
-button:hover{
+.non:hover{
  background-color: orange;
  transition: 0.2s;
 }
+
 #next{
   width: 170px;
   height: 170px;
@@ -404,7 +389,7 @@ button:hover{
   bottom: 0;
   right: 0;
   animation: forwards;
-  animation-duration: 2x;
+  animation-duration: 2s;
 }
 #next:hover{
   background-color:orangered;
@@ -414,6 +399,17 @@ button:hover{
 #lives{
   margin: auto;
   font-size: 30px;
+}
+@media screen and (max-width: 1000px){
+  .flexBox{
+    /*width: 400px;*/
+    background-color: red;
+  }
+
+  button{
+    width: 176px;
+  }
+  
 }
 
 </style>
