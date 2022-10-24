@@ -14,7 +14,9 @@
     </div>
     <div class = "flexBox" id="options">
       <div id="info" >
-        Score:{{ score }} Points: <span ref="points"> {{timerCount}}</span>
+        Score:{{ score }} 
+      </div>
+      <div id="timerInfo"> Points: <span ref="points"> {{timerCount}}</span>
       </div>
       <v-button id="option1" :onclick ="optionBtn" :option= "options[0]" class="non" :disabled="display"></v-button>
       <v-button id="option2" :onclick="optionBtn"  :option= "options[1]" class="non" :disabled="display"></v-button>
@@ -312,11 +314,13 @@ export default {
   padding: 0;
 }
 .container{
-  justify-content: center;
   margin-top: 50px;
   display: flex;
   margin-left: 50px;
   margin-right: 50px;
+  position: center;
+  justify-content: center;
+  flex-shrink: unset;
 }
 .flexBox{
   height: 600px;
@@ -347,6 +351,7 @@ export default {
   border-style: dashed;
   border-width: 3px;
   border-color: rgb(0, 0, 0);
+  flex-shrink:calc(0)
 }
 img{
   width: auto;
@@ -357,6 +362,8 @@ img{
   display: flex;
   flex-wrap: wrap;
   align-content: stretch;
+  flex-shrink: calc(0);
+  max-height: 500px;
 }
 button{
   width: 21vmax;
@@ -377,6 +384,15 @@ button{
 .non:hover{
  background-color: orange;
  transition: 0.2s;
+}
+
+#timerInfo{
+  position: fixed;
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 20px;
+  margin-left: 10px;
+  margin-top: 10px;
 }
 
 #next{
