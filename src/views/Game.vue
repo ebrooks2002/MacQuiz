@@ -31,7 +31,8 @@ import  VButton from "./components/VButton.vue";
 import Finished from "./components/Finished.vue"
 import { ref } from 'vue';
 
-const TOTAL_NUM_PICS = 8
+const TOTAL_NUMBER_INDEXES = 8 // how many spots for images we have, max poosible index would be -1
+const NUMBER_INDEXES_PER_PLACE = 10 // how many spots per image, first 5 used, second 5 buffer
 export default {
   components: {
     "finished":Finished,
@@ -116,11 +117,28 @@ export default {
     this.image = this.randomImg()
     this.options[0], this.options[1],this.options[2], this.options[3] = this.randomOption2()
     this.places =[
-      "Olin-Rice",
+      "77 Mac",
+      "Bell",
       "Campus Center",
+      "Chapel",
+      "DeWitt Wallace Library",
+      "Humanities",
       "Janet Wallace",
+      "Kagin",
       "Leonard Center",
-      "Old Main"
+      "Link",
+      "Markim",
+      "Old Main",
+      "Olin Rice",
+      "Weyerhaeuser",
+      "30 Mac",
+      "Bigelow",
+      "Doty",
+      "Dupre",
+      "George Draper Dayton",
+      "Kirk",
+      "Turk",
+      "Wallace"
     ]
     this.correctAns = this.correctAnswer()
     this.randomPlaces = this.randomOption2()
@@ -174,10 +192,13 @@ export default {
       return arr
     },
     randomImg: function() {
-      let index = Math.floor(Math.random() * TOTAL_NUM_PICS)
+      let index = Math.floor(Math.random() * TOTAL_NUMBER_INDEXES)
       let path = "src/assets/images/"
       let img = path + index + ".jpg"
       return img
+    },
+    checkValidIndex: function (index){
+
     },
     nextClick: function() {
       this.toggleDisplay()
@@ -195,37 +216,29 @@ export default {
       this.stopTimer = false
     },
     correctAnswer: function() {
-      console.log("In if")
+      
       if (this.image.slice(18, this.image.length-4) === '0'){
-        console.log("In if")
         return "Carnegie"
       }
       if (this.image.slice(18, this.image.length-4) === '1'){
-        console.log("In if")
         return "Dupre"
       }
       if (this.image.slice(18, this.image.length-4) === '2'){
-        console.log("In if")
         return "Janet Wallace"
       }
       if (this.image.slice(18, this.image.length-4) === '3'){
-        console.log("In if")
         return "Kagin"
       }
       if (this.image.slice(18, this.image.length-4) === '4'){
-        console.log("In if")
         return "Leonard Center"
       }
       if (this.image.slice(18, this.image.length-4) === '5'){
-        console.log("In if")
         return "Old Main"
       }
       if (this.image.slice(18, this.image.length-4) === '6'){
-        console.log("In if")
         return "Olin-Rice"
       }
       if (this.image.slice(18, this.image.length-4) === '7'){
-        console.log("In if")
         return "Weyerhauser"
       }
     },
