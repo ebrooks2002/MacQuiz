@@ -33,8 +33,7 @@ import  VButton from "./components/VButton.vue";
 import Finished from "./components/Finished.vue"
 import { ref } from 'vue';
 
-const TOTAL_NUMBER_INDEXES = 8 // how many spots for images we have, max poosible index would be -1
-const NUMBER_INDEXES_PER_PLACE = 10 // how many spots per image, first 5 used, second 5 buffer
+const TOTAL_NUMBER = 0 //delete
 export default {
   components: {
     "finished":Finished,
@@ -46,16 +45,55 @@ export default {
       display: false,
       randomPlaces: null,
       places: [
-        "Olin-Rice",
+        "77 Mac",
+        "Bell",
         "Campus Center",
-        "Janet Wallace",
-        "Leonard Center",
-        "Old Main",
         "Carnegie",
-        "Dupre",
+        "Chapel",
+        "DeWitt Wallace Library",
+        "Humanities",
+        "Janet Wallace",
         "Kagin",
-        "Weyerhauser"
+        "Leonard Center",
+        "Link",
+        "Markim",
+        "Old Main",
+        "Olin Rice",
+        "Weyerhaeuser",
+        "30 Mac",
+        "Bigelow",
+        "Doty",
+        "Dupre",
+        "George Draper Dayton",
+        "Kirk",
+        "Turk",
+        "Wallace"
       ],
+      imageMap: new Map([
+        ["30 Mac", [0]],
+        ["77 Mac", [0]],
+        //["Bell", []],
+        ["Bigelow", [0]],
+        ["Campus Center", [0, 1]],
+        ["Carnegie", [0, 1]],
+        //["Chapel", []],
+        ["DeWitt Wallace Library", [0,1,2,3,4,5,6,7,8,9,10]],
+        ["Doty", [0]],
+        ["Dupre", [0,1,2,3]],
+        ["George Draper Dayton", [0]],
+        ["Humanities", [0,1,2]],
+        ["Janet Wallace", [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]],
+        ["Kagin", [0,1]],
+        ["Kirk", [0,1]],
+        ["Leonard Center", [0,1,2,3,4,5,6,7,8]],
+        ["Link", [0]],
+        ["Markim", [0,1]],
+        ["Old Main", [0,1,2,3,4,5,]],
+        ["Olin Rice", [0,1,2,3,4,5,6,7,8,9,10,11,12]],
+        ["Turk", [0]],
+        ["Wallace", [0,1]],
+        ["Weyerhaeuser", [0,1,2,3,4]]
+      ]),
       image: null,
       correctAns: null,
       clickedBtn: null,
@@ -101,7 +139,7 @@ export default {
   mounted() {
     this.image = this.randomImg()
     this.options[0], this.options[1],this.options[2], this.options[3] = this.randomOption2()
-    this.places =[
+    this.places = [
       "77 Mac",
       "Bell",
       "Campus Center",
@@ -177,18 +215,18 @@ export default {
       return arr
     },
     randomImg: function() {
-      let index = Math.floor(Math.random() * TOTAL_NUMBER_INDEXES)
+      let imageMap = this.imageMap
+      const keys = Array.from(imageMap.keys())
+      const buildingName = keys.random()
+      const randomImageIndex = imageMap.get(buildingName).random()
       let path = "src/assets/images/"
-      let img = path + index + ".jpg"
+      let img = path + buildingName + "/" + randomImageIndex + ".jpg"
       return img
-    },
-    checkValidIndex: function (index){
-
     },
     nextClick: function() {
       this.toggleDisplay()
       this.resetClasses()
-      console.log(this.places)
+      //console.log(this.places)
       this.image = this.randomImg()
       this.correctAns = this.correctAnswer()
       this.start()
@@ -201,31 +239,7 @@ export default {
       this.stopTimer = false
     },
     correctAnswer: function() {
-      
-      if (this.image.slice(18, this.image.length-4) === '0'){
-        return "Carnegie"
-      }
-      if (this.image.slice(18, this.image.length-4) === '1'){
-        return "Dupre"
-      }
-      if (this.image.slice(18, this.image.length-4) === '2'){
-        return "Janet Wallace"
-      }
-      if (this.image.slice(18, this.image.length-4) === '3'){
-        return "Kagin"
-      }
-      if (this.image.slice(18, this.image.length-4) === '4'){
-        return "Leonard Center"
-      }
-      if (this.image.slice(18, this.image.length-4) === '5'){
-        return "Old Main"
-      }
-      if (this.image.slice(18, this.image.length-4) === '6'){
-        return "Olin-Rice"
-      }
-      if (this.image.slice(18, this.image.length-4) === '7'){
-        return "Weyerhauser"
-      }
+      return this.image.slice(18, this.image.length-6)
     },
     showCorrectAnswer: function (){
       if (this.options[0] === this.correctAns){
@@ -291,6 +305,9 @@ export default {
       this.timer = null
     },
   }
+}
+Array.prototype.random = function () { // returns radom item in an array
+  return this[Math.floor((Math.random()*this.length))];
 }
 </script>
 
