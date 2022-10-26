@@ -1,5 +1,6 @@
 <template>
   <div class="navBar">
+    <!-- <img alt="FunQuizGame Logo" class="logo" src="src/assets/images/logo.png" width="25" height="25" /> -->
     <router-link id="homeBtn" to="/">FunQuizGame</router-link>
   </div>
   <div class="container">
@@ -7,8 +8,6 @@
       v-if="buttonTrigger"
       :score = "score"
       :TogglePopup = "resetGame"
-      :scoreSaved = "scoreSaved"
-      :scoreSave = "scoreSave"
     >
     </finished>
     <div class = "flexBox" id="image">
@@ -16,7 +15,9 @@
     </div>
     <div class = "flexBox" id="options">
       <div id="info" >
-        Score:{{ score }} Points: <span ref="points"> {{timerCount}}</span>
+        Score:{{ score }} 
+      </div>
+      <div class="timerInfo" id="timer"> Timer: <span ref="points"> {{timerCount}}</span>
       </div>
       <v-button id="option1" :onclick ="optionBtn" :option= "options[0]" class="non" :disabled="display"></v-button>
       <v-button id="option2" :onclick="optionBtn"  :option= "options[1]" class="non" :disabled="display"></v-button>
@@ -33,7 +34,30 @@ import  VButton from "./components/VButton.vue";
 import Finished from "./components/Finished.vue"
 import { ref } from 'vue';
 
-const TOTAL_NUM_PICS = 8
+const TOTAL_NUMBER = 0 //delete
+const ALL_PLACES = ["77 Mac",
+        "Bell",
+        "Campus Center",
+        "Carnegie",
+        "Chapel",
+        "DeWitt Wallace Library",
+        "Humanities",
+        "Janet Wallace",
+        "Kagin",
+        "Leonard Center",
+        "Link",
+        "Markim",
+        "Old Main",
+        "Olin Rice",
+        "Weyerhaeuser",
+        "30 Mac",
+        "Bigelow",
+        "Doty",
+        "Dupre",
+        "George Draper Dayton",
+        "Kirk",
+        "Turk",
+        "Wallace"]
 export default {
   components: {
     "finished":Finished,
@@ -44,17 +68,32 @@ export default {
       score: 0,
       display: false,
       randomPlaces: null,
-      places: [
-        "Olin-Rice",
-        "Campus Center",
-        "Janet Wallace",
-        "Leonard Center",
-        "Old Main",
-        "Carnegie",
-        "Dupre",
-        "Kagin",
-        "Weyerhauser"
-      ],
+      places: ALL_PLACES,
+      imageMap: new Map([
+        ["30 Mac", [0]],
+        ["77 Mac", [0]],
+        //["Bell", []],
+        ["Bigelow", [0]],
+        ["Campus Center", [0, 1]],
+        ["Carnegie", [0, 1]],
+        //["Chapel", []],
+        ["DeWitt Wallace Library", [0,1,2,3,4,5,6,7,8,9,10]],
+        //["Doty", [0]],
+        ["Dupre", [0,1,2,3]],
+        ["George Draper Dayton", [0]],
+        ["Humanities", [0,1,2]],
+        ["Janet Wallace", [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]],
+        ["Kagin", [0,1]],
+        ["Kirk", [0,1]],
+        ["Leonard Center", [0,1,2,3,4,5,6,7,8]],
+        ["Link", [0]],
+        ["Markim", [0,1]],
+        ["Old Main", [0,1,2,3,4,5,]],
+        ["Olin Rice", [0,1,2,3,4,5,6,7,8,9,10,11,12]],
+        ["Turk", [0,1]],
+        ["Wallace", [0,1]],
+        ["Weyerhaeuser", [0,1,2,3,4]]
+      ]),
       image: null,
       correctAns: null,
       clickedBtn: null,
@@ -64,8 +103,7 @@ export default {
       timer: null,
       isRunning: false,
       lives: 3,
-      buttonTrigger: false,
-      scoreSave: false
+      buttonTrigger: false
     }
   },
   created: function() {
@@ -101,23 +139,11 @@ export default {
   mounted() {
     this.image = this.randomImg()
     this.options[0], this.options[1],this.options[2], this.options[3] = this.randomOption2()
-    this.places =[
-      "Olin-Rice",
-      "Campus Center",
-      "Janet Wallace",
-      "Leonard Center",
-      "Old Main"
-    ]
+    this.places = ALL_PLACES
     this.correctAns = this.correctAnswer()
     this.randomPlaces = this.randomOption2()
   },
   methods: {
-    scoreSaved: function (){
-      this.scoreSave = true
-    },
-    scoreNotSaved: function (){
-      this.scoreSave = false
-    },
     resetGame: function (){
           this.score = 0
           this.image = null
@@ -131,10 +157,10 @@ export default {
           this.lives = 3
           this.buttonTrigger = false
       this.nextClick()
-      this.scoreNotSaved()
 
     },
     optionBtn: function(event) {
+
       console.log(this.correctAns)
       this.showCorrectAnswer()
       this.display = !this.display
@@ -144,6 +170,8 @@ export default {
       this.checkIfCorrect()
       if (this.lives <= 0)
         this.TogglePopup()
+
+      document.getElementById('timer').className = ''
     },
     toggleDisplay: function (){
       this.display = !this.display
@@ -167,15 +195,18 @@ export default {
       return arr
     },
     randomImg: function() {
-      let index = Math.floor(Math.random() * TOTAL_NUM_PICS)
+      let imageMap = this.imageMap
+      const keys = Array.from(imageMap.keys())
+      const buildingName = keys.random()
+      const randomImageIndex = imageMap.get(buildingName).random()
       let path = "src/assets/images/"
-      let img = path + index + ".jpg"
+      let img = path + buildingName + "/" + randomImageIndex + ".jpg"
       return img
     },
     nextClick: function() {
       this.toggleDisplay()
       this.resetClasses()
-      console.log(this.places)
+      //console.log(this.places)
       this.image = this.randomImg()
       this.correctAns = this.correctAnswer()
       this.start()
@@ -186,32 +217,10 @@ export default {
       this.options[3] = options[3]
       this.timerCount = 1000
       this.stopTimer = false
+      document.getElementById('timer').className = 'timerInfo'
     },
     correctAnswer: function() {
-      if (this.image.slice(18, this.image.length-4) === '0'){
-        return "Carnegie"
-      }
-      if (this.image.slice(18, this.image.length-4) === '1'){
-        return "Dupre"
-      }
-      if (this.image.slice(18, this.image.length-4) === '2'){
-        return "Janet Wallace"
-      }
-      if (this.image.slice(18, this.image.length-4) === '3'){
-        return "Kagin"
-      }
-      if (this.image.slice(18, this.image.length-4) === '4'){
-        return "Leonard Center"
-      }
-      if (this.image.slice(18, this.image.length-4) === '5'){
-        return "Old Main"
-      }
-      if (this.image.slice(18, this.image.length-4) === '6'){
-        return "Olin-Rice"
-      }
-      if (this.image.slice(18, this.image.length-4) === '7'){
-        return "Weyerhauser"
-      }
+      return this.image.slice(18, this.image.length-6)
     },
     showCorrectAnswer: function (){
       if (this.options[0] === this.correctAns){
@@ -278,6 +287,9 @@ export default {
     },
   }
 }
+Array.prototype.random = function () { // returns radom item in an array
+  return this[Math.floor((Math.random()*this.length))];
+}
 </script>
 
 <style scoped>
@@ -300,15 +312,17 @@ export default {
   padding: 0;
 }
 .container{
-  justify-content: center;
   margin-top: 50px;
   display: flex;
   margin-left: 50px;
   margin-right: 50px;
+  position: center;
+  justify-content: center;
+  flex-shrink: unset;
 }
 .flexBox{
-  height: 500px;
-  width: 600px;
+  height: 600px;
+  width: 500px;
   margin-top: 20px;
   text-align: center;
   padding: 5px
@@ -335,6 +349,7 @@ export default {
   border-style: dashed;
   border-width: 3px;
   border-color: rgb(0, 0, 0);
+  flex-shrink:calc(0)
 }
 img{
   width: auto;
@@ -345,8 +360,8 @@ img{
   display: flex;
   flex-wrap: wrap;
   align-content: stretch;
-  height: 600px;
-  width: 500px;
+  flex-shrink: calc(0);
+  max-height: 500px;
 }
 button{
   width: 21vmax;
@@ -369,6 +384,30 @@ button{
  transition: 0.2s;
 }
 
+#timer{
+  position: fixed;
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 20px;
+  margin-left: 10px;
+  margin-top: 10px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  
+}
+.timerInfo{
+  animation-name: timerAnim;
+  animation-duration: 10s;
+}
+
+@keyframes timerAnim {
+  0% {color: green}
+  40% {color: rgb(80, 138, 80)}
+  60% {color: rgb(217, 219, 67)}
+  70% {color: rgb(255, 166, 0)}
+  75% {color: red} 80% {} 85%{color: red} 90% {color: black}
+  92% {color: red} 94% {color: black} 95% {color: red}96%{color: black} 97% {color: red}98%{color: black} 99% {color: red}
+}
+
 #next{
   width: 170px;
   height: 170px;
@@ -379,7 +418,7 @@ button{
   bottom: 0;
   right: 0;
   animation: forwards;
-  animation-duration: 2s;
+  animation-duration: 1s;
 }
 #next:hover{
   background-color:orangered;
@@ -389,43 +428,18 @@ button{
 #lives{
   margin: auto;
   font-size: 30px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
-@media screen and (min-width: 1100px) and (max-width: 1200px){
+@media screen and (max-width: 1000px){
   .flexBox{
-    width: 530px;
-    /*background-color: red;*/
+    /*width: 400px;*/
+    background-color: red;
   }
+
   button{
-    font-size: 20px;
-    width: 210px;
-    height: 210px;
+    width: 176px;
   }
-}
-@media screen and (max-width: 1100px){
-  .flexBox{
-    width: 400px;
-    /*background-color: blue;*/
-  }
-  button{
-    font-size: 17px;
-    width: 150px;
-    height: 150px;
-  }
-  #info{
-    font-size: 30px;
-  }
-}
-@media screen and (max-width: 875px){
-  .flexBox{
-    *width: 350px;
-  }
-  button{
-    width: 125px;
-    height: 125px;
-  }
-  #info{
-    font-size: 25px;
-  }
+  
 }
 
 </style>

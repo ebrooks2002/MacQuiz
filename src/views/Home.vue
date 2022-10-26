@@ -9,6 +9,7 @@ export default {
         <h1 >Home</h1>
         <h2 >Welcome to the best new Macalester game!</h2>
         <!-- https://codingbeautydev.com/blog/vue-router-link-button/ -->
+        <!-- <img alt="FunQuizGame Logo" class="logo" src="src/assets/images/logo.png" width="125" height="125" /> -->
         <router-link
             to="/game"
             custom
