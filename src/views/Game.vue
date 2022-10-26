@@ -1,5 +1,6 @@
 <template>
   <div class="navBar">
+    <!-- <img alt="FunQuizGame Logo" class="logo" src="src/assets/images/logo.png" width="25" height="25" /> -->
     <router-link id="homeBtn" to="/">FunQuizGame</router-link>
   </div>
   <div class="container">
@@ -77,7 +78,7 @@ export default {
         ["Carnegie", [0, 1]],
         //["Chapel", []],
         ["DeWitt Wallace Library", [0,1,2,3,4,5,6,7,8,9,10]],
-        ["Doty", [0]],
+        //["Doty", [0]],
         ["Dupre", [0,1,2,3]],
         ["George Draper Dayton", [0]],
         ["Humanities", [0,1,2]],
@@ -89,7 +90,7 @@ export default {
         ["Markim", [0,1]],
         ["Old Main", [0,1,2,3,4,5,]],
         ["Olin Rice", [0,1,2,3,4,5,6,7,8,9,10,11,12]],
-        ["Turk", [0]],
+        ["Turk", [0,1]],
         ["Wallace", [0,1]],
         ["Weyerhaeuser", [0,1,2,3,4]]
       ]),
