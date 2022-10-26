@@ -34,18 +34,7 @@ import Finished from "./components/Finished.vue"
 import { ref } from 'vue';
 
 const TOTAL_NUMBER = 0 //delete
-export default {
-  components: {
-    "finished":Finished,
-    "v-button":VButton
-  },
-  data() {
-    return {
-      score: 0,
-      display: false,
-      randomPlaces: null,
-      places: [
-        "77 Mac",
+const ALL_PLACES = ["77 Mac",
         "Bell",
         "Campus Center",
         "Carnegie",
@@ -67,8 +56,18 @@ export default {
         "George Draper Dayton",
         "Kirk",
         "Turk",
-        "Wallace"
-      ],
+        "Wallace"]
+export default {
+  components: {
+    "finished":Finished,
+    "v-button":VButton
+  },
+  data() {
+    return {
+      score: 0,
+      display: false,
+      randomPlaces: null,
+      places: ALL_PLACES,
       imageMap: new Map([
         ["30 Mac", [0]],
         ["77 Mac", [0]],
@@ -139,30 +138,7 @@ export default {
   mounted() {
     this.image = this.randomImg()
     this.options[0], this.options[1],this.options[2], this.options[3] = this.randomOption2()
-    this.places = [
-      "77 Mac",
-      "Bell",
-      "Campus Center",
-      "Chapel",
-      "DeWitt Wallace Library",
-      "Humanities",
-      "Janet Wallace",
-      "Kagin",
-      "Leonard Center",
-      "Link",
-      "Markim",
-      "Old Main",
-      "Olin Rice",
-      "Weyerhaeuser",
-      "30 Mac",
-      "Bigelow",
-      "Doty",
-      "Dupre",
-      "George Draper Dayton",
-      "Kirk",
-      "Turk",
-      "Wallace"
-    ]
+    this.places = ALL_PLACES
     this.correctAns = this.correctAnswer()
     this.randomPlaces = this.randomOption2()
   },
