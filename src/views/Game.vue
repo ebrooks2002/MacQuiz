@@ -7,6 +7,8 @@
       v-if="buttonTrigger"
       :score = "score"
       :TogglePopup = "resetGame"
+      :scoreSaved = "scoreSaved"
+      :scoreSave = "scoreSave"
     >
     </finished>
     <div class = "flexBox" id="image">
@@ -62,7 +64,8 @@ export default {
       timer: null,
       isRunning: false,
       lives: 3,
-      buttonTrigger: false
+      buttonTrigger: false,
+      scoreSave: false
     }
   },
   created: function() {
@@ -109,6 +112,12 @@ export default {
     this.randomPlaces = this.randomOption2()
   },
   methods: {
+    scoreSaved: function (){
+      this.scoreSave = true
+    },
+    scoreNotSaved: function (){
+      this.scoreSave = false
+    },
     resetGame: function (){
           this.score = 0
           this.image = null
@@ -122,6 +131,7 @@ export default {
           this.lives = 3
           this.buttonTrigger = false
       this.nextClick()
+      this.scoreNotSaved()
 
     },
     optionBtn: function(event) {
@@ -297,8 +307,8 @@ export default {
   margin-right: 50px;
 }
 .flexBox{
-  height: 600px;
-  width: 500px;
+  height: 500px;
+  width: 600px;
   margin-top: 20px;
   text-align: center;
   padding: 5px
@@ -335,6 +345,8 @@ img{
   display: flex;
   flex-wrap: wrap;
   align-content: stretch;
+  height: 600px;
+  width: 500px;
 }
 button{
   width: 21vmax;
@@ -378,16 +390,42 @@ button{
   margin: auto;
   font-size: 30px;
 }
-@media screen and (max-width: 1000px){
+@media screen and (min-width: 1100px) and (max-width: 1200px){
   .flexBox{
-    /*width: 400px;*/
-    background-color: red;
+    width: 530px;
+    /*background-color: red;*/
   }
-
   button{
-    width: 176px;
+    font-size: 20px;
+    width: 210px;
+    height: 210px;
   }
-  
+}
+@media screen and (max-width: 1100px){
+  .flexBox{
+    width: 400px;
+    /*background-color: blue;*/
+  }
+  button{
+    font-size: 17px;
+    width: 150px;
+    height: 150px;
+  }
+  #info{
+    font-size: 30px;
+  }
+}
+@media screen and (max-width: 875px){
+  .flexBox{
+    *width: 350px;
+  }
+  button{
+    width: 125px;
+    height: 125px;
+  }
+  #info{
+    font-size: 25px;
+  }
 }
 
 </style>
