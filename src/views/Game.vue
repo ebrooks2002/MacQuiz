@@ -8,6 +8,8 @@
       v-if="buttonTrigger"
       :score = "score"
       :TogglePopup = "resetGame"
+      :scoreSave = "scoreSaved"
+      :scoreSaved = "toggleScoreSavedTrue"
     >
     </finished>
     <div class = "flexBox" id="image">
@@ -103,7 +105,8 @@ export default {
       timer: null,
       isRunning: false,
       lives: 3,
-      buttonTrigger: false
+      buttonTrigger: false,
+      scoreSaved:false
     }
   },
   created: function() {
@@ -144,6 +147,10 @@ export default {
     this.randomPlaces = this.randomOption2()
   },
   methods: {
+    toggleScoreSavedTrue: function (){
+      this.scoreSaved = true
+    },
+
     resetGame: function (){
           this.score = 0
           this.image = null
@@ -156,6 +163,7 @@ export default {
           this.isRunning = false
           this.lives = 3
           this.buttonTrigger = false
+      this.scoreSaved = false
       this.nextClick()
 
     },
@@ -430,16 +438,6 @@ button{
   font-size: 30px;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
-@media screen and (max-width: 1000px){
-  .flexBox{
-    /*width: 400px;*/
-    background-color: red;
-  }
 
-  button{
-    width: 176px;
-  }
-  
-}
 
 </style>

@@ -6,14 +6,30 @@
       <slot />
       <h1>Congratulations</h1>
       <h2>Your score was {{score}} </h2>
+      <table class="styled-table">
+        <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Name</th>
+          <th>Score</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="(user,index) in leaderboard" :key="index">
+          <td>{{ index + 1 }}</td>
+          <td>{{user[0]}}</td>
+          <td>{{user[1]}}</td>
+        </tr>
+        </tbody>
+      </table>
       <input
-          :disabled="scoreSave"
+          v-if="!scoreSave"
           id="inputID"
           type="text"
-          placeholder="Text"
+          placeholder="Enter Name"
           ref="inputField"
       />
-      <button id="enter" @click = "writeUserScore" >Enter</button>
+      <button id="enter" @click = "writeUserScore" v-if="!scoreSave">Enter</button>
       <div v-if="scoreSave">Your score was added!!</div>
       <div id="flex-button">
       <button class="popup-close" @click="TogglePopup()">
@@ -35,11 +51,9 @@
 
 <script>
 
-import { getDatabase, ref, set,push, query, orderByChild, } from "firebase/database";
+import { getDatabase, ref, set,push, query, orderByChild, onValue } from "firebase/database";
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-import { collection, doc, setDoc } from "firebase/firestore";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -58,9 +72,11 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
 const db = getDatabase();
 
+// Import Bootstrap and BootstrapVue CSS files (order is important)
+// import 'bootstrap/dist/css/bootstrap.css'
+// import 'bootstrap-vue/dist/bootstrap-vue.css'
 export default {
   props: {
     TogglePopup: null,
@@ -68,9 +84,7 @@ export default {
     scoreSaved: null,
     scoreSave: null,
   },
-  beforeCreate() {
 
-  },
 
   data() {
     return {
@@ -78,19 +92,15 @@ export default {
       leaderboard: []
     }
   },
+
+  created() {
+    this.leaderboard = this.getLeaderboard()
+  },
   mounted() {
-    this.leaderboard = []
-    db.ref('users').once('value', function (snapshot) {
-      snapshot.forEach((
-          function (ChildSnapShot){
-              this.leaderboard.push([ChildSnapShot.val().username, ChildSnapShot.val().score])
-          }
-      ))
-    })
-    console.log(this.leaderboard)
   },
   methods: {
     writeUserScore: function() {
+      console.log(this.leaderboard)
       push(ref(db, 'users/'),{
         username: this.$refs.inputField.value,
         score: this.score
@@ -100,7 +110,24 @@ export default {
         console.log('error')
       })
       document.getElementById('inputID').value = ''
-     }
+      this.leaderboard = this.getLeaderboard()
+     },
+
+    getLeaderboard: function () {
+      let data = ref(db,'users')
+      let leaderboard = []
+      onValue(data, function (snapshot) {
+        snapshot.forEach((
+            function (ChildSnapShot){
+              leaderboard.push([ChildSnapShot.val().username, ChildSnapShot.val().score])
+            }
+        ))
+      })
+      leaderboard.sort(function(a,b) { return a[1] - b[1]; });
+      leaderboard = leaderboard.slice(-10)
+      leaderboard.reverse()
+      return leaderboard
+    }
   },
 
 
@@ -143,6 +170,40 @@ export default {
   text-decoration: none;
   height: 24px;
   width: 80px;
+}
+
+/*Code From https://dev.to/dcodeyt/creating-beautiful-html-tables-with-css-428l*/
+.styled-table {
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 0.9em;
+  font-family: sans-serif;
+  min-width: 400px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+.styled-table thead tr {
+  background-color:  #01426a;
+  color: #ffffff;
+  text-align: left;
+}
+.styled-table th,
+.styled-table td {
+  padding: 6px 15px;
+}
+.styled-table tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+  border-bottom: 2px solid #01426a;
+}
+.styled-table tbody tr.active-row {
+  font-weight: bold;
+  color: #009879;
 }
 
 </style>
