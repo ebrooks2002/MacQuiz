@@ -123,7 +123,7 @@ export default {
             }
         ))
       })
-      leaderboard.sort(function(a,b) { return a[1] - b[1]; });
+      leaderboard = leaderboard.sort(function(a,b) { return a[1] - b[1]; });
       leaderboard = leaderboard.slice(-10)
       leaderboard.reverse()
       return leaderboard
@@ -143,7 +143,6 @@ export default {
   bottom: 0;
   z-index: 99;
   background-color: rgba(0, 0, 0, 0.2);
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -154,6 +153,8 @@ export default {
   background: #FFF;
   padding: 32px;
   text-align: center;
+  border: 3px solid #D44420;
+
 }
 #enter{
   box-sizing: border-box;
@@ -182,7 +183,7 @@ export default {
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 .styled-table thead tr {
-  background-color:  #01426a;
+  background-color:  #D44420;
   color: #ffffff;
   text-align: left;
 }
@@ -199,11 +200,15 @@ export default {
 }
 
 .styled-table tbody tr:last-of-type {
-  border-bottom: 2px solid #01426a;
+  border-bottom: 2px solid #D44420;
 }
 .styled-table tbody tr.active-row {
   font-weight: bold;
   color: #009879;
+}
+
+button{
+  background-color: #D44420;
 }
 
 </style>
