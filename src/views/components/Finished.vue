@@ -6,7 +6,7 @@
       <slot />
       <h1>Congratulations</h1>
       <h2>Your score was {{score}} </h2>
-      <table class="styled-table">
+      <table v-if="scoreSave" class="styled-table">
         <thead>
         <tr>
           <th>Rank</th>
@@ -28,8 +28,9 @@
           type="text"
           placeholder="Enter Name"
           ref="inputField"
+          @keyup.enter = "writeUserScore"
       />
-      <button id="enter" @click = "writeUserScore" v-if="!scoreSave">Enter</button>
+      <button id="enter" @click = "writeUserScore" v-if="!scoreSave" >Enter</button>
       <div v-if="scoreSave">Your score was added!!</div>
       <div id="flex-button">
       <button class="popup-close" @click="TogglePopup()">
@@ -171,6 +172,7 @@ export default {
   text-decoration: none;
   height: 24px;
   width: 80px;
+  cursor: pointer;
 }
 
 /*Code From https://dev.to/dcodeyt/creating-beautiful-html-tables-with-css-428l*/

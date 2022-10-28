@@ -169,7 +169,6 @@ export default {
     },
     optionBtn: function(event) {
 
-      console.log(this.correctAns)
       this.showCorrectAnswer()
       this.display = !this.display
       this.clickedBtn = (event !== undefined) ? event.target.id:undefined
@@ -214,7 +213,6 @@ export default {
     nextClick: function() {
       this.toggleDisplay()
       this.resetClasses()
-      //console.log(this.places)
       this.image = this.randomImg()
       this.correctAns = this.correctAnswer()
       this.start()
