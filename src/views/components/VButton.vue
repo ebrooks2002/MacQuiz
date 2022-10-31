@@ -1,5 +1,5 @@
 <template>
-  <button v-on:click = "onclick" >{{option}}</button>
+  <button id="optionBtn" v-on:click = "onclick" >{{option}}</button>
 </template>
 
 <script>
@@ -27,5 +27,6 @@ export default {
 .incorrect {
   background-color: red;
 }
+
 </style>
 

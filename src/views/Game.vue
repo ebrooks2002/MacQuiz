@@ -8,6 +8,8 @@
       v-if="buttonTrigger"
       :score = "score"
       :TogglePopup = "resetGame"
+      :scoreSave = "scoreSaved"
+      :scoreSaved = "toggleScoreSavedTrue"
     >
     </finished>
     <div class = "flexBox" id="image">
@@ -17,7 +19,7 @@
       <div id="info" >
         Score:{{ score }} 
       </div>
-      <div id="timerInfo"> Points: <span ref="points"> {{timerCount}}</span>
+      <div class="timerInfo" id="timer"> Timer: <span ref="points"> {{timerCount}}</span>
       </div>
       <v-button id="option1" :onclick ="optionBtn" :option= "options[0]" class="non" :disabled="display"></v-button>
       <v-button id="option2" :onclick="optionBtn"  :option= "options[1]" class="non" :disabled="display"></v-button>
@@ -103,7 +105,8 @@ export default {
       timer: null,
       isRunning: false,
       lives: 3,
-      buttonTrigger: false
+      buttonTrigger: false,
+      scoreSaved:false
     }
   },
   created: function() {
@@ -144,6 +147,10 @@ export default {
     this.randomPlaces = this.randomOption2()
   },
   methods: {
+    toggleScoreSavedTrue: function (){
+      this.scoreSaved = true
+    },
+
     resetGame: function (){
           this.score = 0
           this.image = null
@@ -156,11 +163,12 @@ export default {
           this.isRunning = false
           this.lives = 3
           this.buttonTrigger = false
+      this.scoreSaved = false
       this.nextClick()
 
     },
     optionBtn: function(event) {
-      console.log(this.correctAns)
+
       this.showCorrectAnswer()
       this.display = !this.display
       this.clickedBtn = (event !== undefined) ? event.target.id:undefined
@@ -169,6 +177,8 @@ export default {
       this.checkIfCorrect()
       if (this.lives <= 0)
         this.TogglePopup()
+
+      document.getElementById('timer').className = ''
     },
     toggleDisplay: function (){
       this.display = !this.display
@@ -210,7 +220,6 @@ export default {
     nextClick: function() {
       this.toggleDisplay()
       this.resetClasses()
-      //console.log(this.places)
       this.image = this.randomImg()
       this.correctAns = this.correctAnswer()
       this.start()
@@ -221,6 +230,7 @@ export default {
       this.options[3] = options[3]
       this.timerCount = 1000
       this.stopTimer = false
+      document.getElementById('timer').className = 'timerInfo'
     },
     correctAnswer: function() {
       return this.image.slice(18, this.image.length-7)
@@ -387,13 +397,28 @@ button{
  transition: 0.2s;
 }
 
-#timerInfo{
+#timer{
   position: fixed;
   display: flex;
   flex-wrap: wrap;
   padding-left: 20px;
   margin-left: 10px;
   margin-top: 10px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  
+}
+.timerInfo{
+  animation-name: timerAnim;
+  animation-duration: 10s;
+}
+
+@keyframes timerAnim {
+  0% {color: green}
+  40% {color: rgb(80, 138, 80)}
+  60% {color: rgb(217, 219, 67)}
+  70% {color: rgb(255, 166, 0)}
+  75% {color: red} 80% {} 85%{color: red} 90% {color: black}
+  92% {color: red} 94% {color: black} 95% {color: red}96%{color: black} 97% {color: red}98%{color: black} 99% {color: red}
 }
 
 #next{
@@ -406,7 +431,7 @@ button{
   bottom: 0;
   right: 0;
   animation: forwards;
-  animation-duration: 2s;
+  animation-duration: 1s;
 }
 #next:hover{
   background-color:orangered;
@@ -416,17 +441,8 @@ button{
 #lives{
   margin: auto;
   font-size: 30px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
-@media screen and (max-width: 1000px){
-  .flexBox{
-    /*width: 400px;*/
-    background-color: red;
-  }
 
-  button{
-    width: 176px;
-  }
-  
-}
 
 </style>
