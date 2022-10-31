@@ -196,8 +196,15 @@ export default {
       const keys = Array.from(imageMap.keys())
       const buildingName = keys.random()
       const randomImageIndex = imageMap.get(buildingName).random()
+      let randomImageIndexString = ""
+      if (randomImageIndex < 10){
+        randomImageIndexString = "0" + randomImageIndex.toString()
+      }
+      else {
+        randomImageIndexString = randomImageIndex.toString()
+      }
       let path = "src/assets/images/"
-      let img = path + buildingName + "/" + randomImageIndex + ".jpg"
+      let img = path + buildingName + "/" + randomImageIndexString + ".jpg"
       return img
     },
     nextClick: function() {
@@ -216,7 +223,7 @@ export default {
       this.stopTimer = false
     },
     correctAnswer: function() {
-      return this.image.slice(18, this.image.length-6)
+      return this.image.slice(18, this.image.length-7)
     },
     showCorrectAnswer: function (){
       if (this.options[0] === this.correctAns){
