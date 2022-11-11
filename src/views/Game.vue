@@ -17,10 +17,11 @@
     </div>
     <div class = "flexBox" id="options">
       <div id="info" >
-        Score:{{ score }} 
+        Score:{{ score }}
+        <div class="timerInfo" id="timer">{{timerCount}}</div>
+
       </div>
-      <div class="timerInfo" id="timer"> Timer: <span ref="points"> {{timerCount}}</span>
-      </div>
+
       <v-button id="option1" :onclick ="optionBtn" :option= "options[0]" class="non" :disabled="display"></v-button>
       <v-button id="option2" :onclick="optionBtn"  :option= "options[1]" class="non" :disabled="display"></v-button>
       <v-button id="option3" :onclick="optionBtn"  :option= "options[2]" class="non" :disabled="display"></v-button>
@@ -34,6 +35,7 @@
 <script>
 import  VButton from "./components/VButton.vue";
 import Finished from "./components/Finished.vue"
+import image from "./components/image.vue";
 import { ref } from 'vue';
 
 const TOTAL_NUMBER = 0 //delete
@@ -63,7 +65,8 @@ const ALL_PLACES = ["77 Mac",
 export default {
   components: {
     "finished":Finished,
-    "v-button":VButton
+    "v-button":VButton,
+    "v-image": image
   },
   data() {
     return {
@@ -344,9 +347,10 @@ Array.prototype.random = function () { // returns radom item in an array
   width: 100%;
   height: 70px;
   box-sizing: border-box;
-  font-size: 45px;
+  font-size: 30px;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   margin: auto;
+  text-align: center;
 }
 #image{
   clear: both;
@@ -398,9 +402,6 @@ button{
 }
 
 #timer{
-  position: fixed;
-  display: flex;
-  flex-wrap: wrap;
   padding-left: 20px;
   margin-left: 10px;
   margin-top: 10px;
@@ -408,19 +409,36 @@ button{
   
 }
 .timerInfo{
+  width: 30%;
+  margin: auto;
+  border: 1px solid black;
   animation-name: timerAnim;
   animation-duration: 10s;
+  font-size: 15px;
+  padding: 3px;
 }
 
+/*@keyframes timerAnim {*/
+/*  0% {color: green}*/
+/*  40% {color: rgb(80, 138, 80)}*/
+/*  60% {color: rgb(217, 219, 67)}*/
+/*  70% {color: rgb(255, 166, 0)}*/
+/*  75% {color: red} 80% {} 85%{color: red} 90% {color: black}*/
+/*  92% {color: red} 94% {color: black} 95% {color: red}96%{color: black} 97% {color: red}98%{color: black} 99% {color: red}*/
+/*}*/
 @keyframes timerAnim {
-  0% {color: green}
-  40% {color: rgb(80, 138, 80)}
-  60% {color: rgb(217, 219, 67)}
-  70% {color: rgb(255, 166, 0)}
-  75% {color: red} 80% {} 85%{color: red} 90% {color: black}
-  92% {color: red} 94% {color: black} 95% {color: red}96%{color: black} 97% {color: red}98%{color: black} 99% {color: red}
+  0% {  background: linear-gradient(right, green 100%, transparent 0%)}
+  10% {  background: linear-gradient(right, green 90%, transparent 10%);}
+  20% {  background: linear-gradient(right, green 80%, transparent 20%);}
+  30% {  background: linear-gradient(right, green 70%, transparent 30%);}
+  40% {  background: linear-gradient(right, green 60%, transparent 40%);}
+  50% {  background: linear-gradient(right, green 50%, transparent 50%);}
+  60% {  background: linear-gradient(right, green 40%, transparent 60%);}
+  70% {  background: linear-gradient(right, green 30%, transparent 70%);}
+  80% {  background: linear-gradient(right, green 20%, transparent 80%);}
+  90% {  background: linear-gradient(right, green 10%, transparent 90%);}
+  100% {  background: linear-gradient(right, red 100%, transparent 0%);}
 }
-
 #next{
   width: 170px;
   height: 170px;
