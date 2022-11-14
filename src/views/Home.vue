@@ -24,7 +24,6 @@ export default {
 
 <style>
     body{background-color:#d9ecff;}
-
     .home{
         text-align: center;
         font-family: "Trebuchet MS";

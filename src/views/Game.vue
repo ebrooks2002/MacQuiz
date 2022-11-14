@@ -28,9 +28,9 @@
       <div id = "lives"> lives: {{lives}}</div>
     </div>
     <button v-if="display" v-on:click="nextClick()" id="next"> Next</button>
-
   </div>
 </template>
+
 <script>
 import  VButton from "./components/VButton.vue";
 import Finished from "./components/Finished.vue"
@@ -269,7 +269,6 @@ export default {
     },
     checkIfCorrect: function () {
       if (this.clickedBtn !== undefined) {
-
         let btn = document.getElementById(this.clickedBtn)
         if (btn.className === 'correct') {
           this.score += this.timerCount
