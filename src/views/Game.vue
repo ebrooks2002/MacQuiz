@@ -72,29 +72,29 @@ export default {
       randomPlaces: null,
       places: ALL_PLACES,
       imageMap: new Map([
-        ["30 Mac", [0]],
-        ["77 Mac", [0]],
-        //["Bell", []],
-        ["Bigelow", [0]],
-        ["Campus Center", [0, 1]],
-        ["Carnegie", [0, 1]],
+        ["30 Mac", ["00"]],
+        ["77 Mac", ["00"]],
+        ["Bell", []],
+        ["Bigelow", ["00"]],
+        ["Campus Center", ["00", "01"]],
+        ["Carnegie", ["00", "01"]],
         //["Chapel", []],
-        ["DeWitt Wallace Library", [0,1,2,3,4,5,6,7,8,9,10]],
-        //["Doty", [0]],
-        ["Dupre", [0,1,2,3]],
-        ["George Draper Dayton", [0]],
-        ["Humanities", [0,1,2]],
-        ["Janet Wallace", [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]],
-        ["Kagin", [0,1]],
-        ["Kirk", [0,1]],
-        ["Leonard Center", [0,1,2,3,4,5,6,7,8]],
-        ["Link", [0]],
-        ["Markim", [0,1]],
-        ["Old Main", [0,1,2,3,4,5,]],
-        ["Olin Rice", [0,1,2,3,4,5,6,7,8,9,10,11,12]],
-        ["Turk", [0,1]],
-        ["Wallace", [0,1]],
-        ["Weyerhaeuser", [0,1,2,3,4]]
+        ["DeWitt Wallace Library", ["00","01","02","03","04","05","06","07","08","09","10"]],
+        //["Doty", []],
+        ["Dupre", ["00","01","02","03"]],
+        ["George Draper Dayton", ["00"]],
+        ["Humanities", ["00","01","02"]],
+        ["Janet Wallace", ["00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15"]],
+        ["Kagin", ["00", "01"]],
+        ["Kirk", ["00", "01"]],
+        ["Leonard Center", ["00","01","02","03","04","05","06","07","08"]],
+        ["Link", ["00"]],
+        ["Markim", ["00", "01"]],
+        ["Old Main", ["00","01","02","03","04","05"]],
+        ["Olin Rice", ["00","01","02","03","04","05","06","07","08","09","10","11","12"]],
+        ["Turck", ["00", "01"]],
+        ["Wallace", ["00", "01"]],
+        ["Weyerhaeuser", ["00","01","02","03","04"]]
       ]),
       image: null,
       correctAns: null,
@@ -202,20 +202,14 @@ export default {
       return arr
     },
     randomImg: function() {
-      let imageMap = this.imageMap
+      const imageMap = this.imageMap
       const keys = Array.from(imageMap.keys())
       const buildingName = keys.random()
-      const randomImageIndex = imageMap.get(buildingName).random()
-      let randomImageIndexString = ""
-      if (randomImageIndex < 10){
-        randomImageIndexString = "0" + randomImageIndex.toString()
-      }
-      else {
-        randomImageIndexString = randomImageIndex.toString()
-      }
-      let path = "src/assets/images/"
-      let img = path + buildingName + "/" + randomImageIndexString + ".jpg"
-      return img
+      const buildingPicutresList = imageMap.get(buildingName)
+      const randomImageIndex = Math.floor(Math.random()*buildingPicutresList.length)
+      const randomImageName = buildingPicutresList[randomImageIndex]
+      const path = "src/assets/images/"
+      return path + buildingName + "/" + randomImageName + ".jpg"
     },
     nextClick: function() {
       this.toggleDisplay()
