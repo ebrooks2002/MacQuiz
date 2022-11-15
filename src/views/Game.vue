@@ -202,14 +202,28 @@ export default {
       return arr
     },
     randomImg: function() {
-      const imageMap = this.imageMap
+      let tag = ""
+      let randomImageMap = this.imageMap
+      switch(Math.floor(Math.random()*2)) {
+        case 0:
+          // randomImageMap = this.imageMap
+          tag = "reg"
+          break
+        case 1:
+          // randomImageMap = this.pixelImageMap
+          tag = "pix"
+          // break
+      }
+      const imageMap = randomImageMap
       const keys = Array.from(imageMap.keys())
       const buildingName = keys.random()
       const buildingPicutresList = imageMap.get(buildingName)
       const randomImageIndex = Math.floor(Math.random()*buildingPicutresList.length)
       const randomImageName = buildingPicutresList[randomImageIndex]
       const path = "src/assets/images/"
-      return path + buildingName + "/" + randomImageName + ".jpg"
+      const img = path + tag + "/" + buildingName + "/" + randomImageName + ".jpg"
+      console.log(img)
+      return img
     },
     nextClick: function() {
       this.toggleDisplay()
@@ -227,7 +241,7 @@ export default {
       document.getElementById('timer').className = 'timerInfo'
     },
     correctAnswer: function() {
-      return this.image.slice(18, this.image.length-7)
+      return this.image.slice(22, this.image.length-7)
     },
     showCorrectAnswer: function (){
       if (this.options[0] === this.correctAns){
