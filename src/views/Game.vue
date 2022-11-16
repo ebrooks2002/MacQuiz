@@ -17,11 +17,10 @@
     </div>
     <div class = "flexBox" id="options">
       <div id="info" >
-        Score:{{ score }}
-        <div class="timerInfo" id="timer">{{timerCount}}</div>
-
+        Score:{{ score }} 
       </div>
-
+      <div class="timerInfo" id="timer"> Timer: <span ref="points"> {{timerCount}}</span>
+      </div>
       <v-button id="option1" :onclick ="optionBtn" :option= "options[0]" class="non" :disabled="display"></v-button>
       <v-button id="option2" :onclick="optionBtn"  :option= "options[1]" class="non" :disabled="display"></v-button>
       <v-button id="option3" :onclick="optionBtn"  :option= "options[2]" class="non" :disabled="display"></v-button>
@@ -29,13 +28,12 @@
       <div id = "lives"> lives: {{lives}}</div>
     </div>
     <button v-if="display" v-on:click="nextClick()" id="next"> Next</button>
-
   </div>
 </template>
+
 <script>
 import  VButton from "./components/VButton.vue";
 import Finished from "./components/Finished.vue"
-import image from "./components/image.vue";
 import { ref } from 'vue';
 
 const TOTAL_NUMBER = 0 //delete
@@ -60,13 +58,12 @@ const ALL_PLACES = ["77 Mac",
         "Dupre",
         "George Draper Dayton",
         "Kirk",
-        "Turck",
+        "Turk",
         "Wallace"]
 export default {
   components: {
     "finished":Finished,
-    "v-button":VButton,
-    "v-image": image
+    "v-button":VButton
   },
   data() {
     return {
@@ -75,29 +72,29 @@ export default {
       randomPlaces: null,
       places: ALL_PLACES,
       imageMap: new Map([
-        ["30 Mac", [0]],
-        ["77 Mac", [0]],
-        //["Bell", []],
-        ["Bigelow", [0]],
-        ["Campus Center", [0, 1]],
-        ["Carnegie", [0, 1]],
+        ["30 Mac", ["00"]],
+        ["77 Mac", ["00"]],
+        ["Bell", []],
+        ["Bigelow", ["00"]],
+        ["Campus Center", ["00", "01"]],
+        ["Carnegie", ["00", "01"]],
         //["Chapel", []],
-        ["DeWitt Wallace Library", [0,1,2,3,4,5,6,7,8,9,10]],
-        //["Doty", [0]],
-        ["Dupre", [0,1,2,3]],
-        ["George Draper Dayton", [0]],
-        ["Humanities", [0,1,2]],
-        ["Janet Wallace", [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]],
-        ["Kagin", [0,1]],
-        ["Kirk", [0,1]],
-        ["Leonard Center", [0,1,2,3,4,5,6,7,8]],
-        ["Link", [0]],
-        ["Markim", [0,1]],
-        ["Old Main", [0,1,2,3,4,5,]],
-        ["Olin Rice", [0,1,2,3,4,5,6,7,8,9,10,11,12]],
-        ["Turck", [0,1]],
-        ["Wallace", [0,1]],
-        ["Weyerhaeuser", [0,1,2,3,4]]
+        ["DeWitt Wallace Library", ["00","01","02","03","04","05","06","07","08","09","10"]],
+        //["Doty", []],
+        ["Dupre", ["00","01","02","03"]],
+        ["George Draper Dayton", ["00"]],
+        ["Humanities", ["00","01","02"]],
+        ["Janet Wallace", ["00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15"]],
+        ["Kagin", ["00", "01"]],
+        ["Kirk", ["00", "01"]],
+        ["Leonard Center", ["00","01","02","03","04","05","06","07","08"]],
+        ["Link", ["00"]],
+        ["Markim", ["00", "01"]],
+        ["Old Main", ["00","01","02","03","04","05"]],
+        ["Olin Rice", ["00","01","02","03","04","05","06","07","08","09","10","11","12"]],
+        ["Turck", ["00", "01"]],
+        ["Wallace", ["00", "01"]],
+        ["Weyerhaeuser", ["00","01","02","03","04"]]
       ]),
       image: null,
       correctAns: null,
@@ -205,19 +202,27 @@ export default {
       return arr
     },
     randomImg: function() {
-      let imageMap = this.imageMap
+      let tag = ""
+      let randomImageMap = this.imageMap
+      switch(Math.floor(Math.random()*2)) {
+        case 0:
+          // randomImageMap = this.imageMap
+          tag = "reg"
+          break
+        case 1:
+          // randomImageMap = this.pixelImageMap
+          tag = "pix"
+          // break
+      }
+      const imageMap = randomImageMap
       const keys = Array.from(imageMap.keys())
       const buildingName = keys.random()
-      const randomImageIndex = imageMap.get(buildingName).random()
-      let randomImageIndexString = ""
-      if (randomImageIndex < 10){
-        randomImageIndexString = "0" + randomImageIndex.toString()
-      }
-      else {
-        randomImageIndexString = randomImageIndex.toString()
-      }
-      let path = "src/assets/images/"
-      let img = path + buildingName + "/" + randomImageIndexString + ".jpg"
+      const buildingPicutresList = imageMap.get(buildingName)
+      const randomImageIndex = Math.floor(Math.random()*buildingPicutresList.length)
+      const randomImageName = buildingPicutresList[randomImageIndex]
+      const path = "src/assets/images/"
+      const img = path + tag + "/" + buildingName + "/" + randomImageName + ".jpg"
+      console.log(img)
       return img
     },
     nextClick: function() {
@@ -236,7 +241,7 @@ export default {
       document.getElementById('timer').className = 'timerInfo'
     },
     correctAnswer: function() {
-      return this.image.slice(18, this.image.length-7)
+      return this.image.slice(22, this.image.length-7)
     },
     showCorrectAnswer: function (){
       if (this.options[0] === this.correctAns){
@@ -272,7 +277,6 @@ export default {
     },
     checkIfCorrect: function () {
       if (this.clickedBtn !== undefined) {
-
         let btn = document.getElementById(this.clickedBtn)
         if (btn.className === 'correct') {
           this.score += this.timerCount
@@ -347,10 +351,9 @@ Array.prototype.random = function () { // returns radom item in an array
   width: 100%;
   height: 70px;
   box-sizing: border-box;
-  font-size: 30px;
+  font-size: 45px;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   margin: auto;
-  text-align: center;
 }
 #image{
   clear: both;
@@ -402,6 +405,9 @@ button{
 }
 
 #timer{
+  position: fixed;
+  display: flex;
+  flex-wrap: wrap;
   padding-left: 20px;
   margin-left: 10px;
   margin-top: 10px;
@@ -409,36 +415,19 @@ button{
   
 }
 .timerInfo{
-  width: 30%;
-  margin: auto;
-  border: 1px solid black;
   animation-name: timerAnim;
   animation-duration: 10s;
-  font-size: 15px;
-  padding: 3px;
 }
 
-/*@keyframes timerAnim {*/
-/*  0% {color: green}*/
-/*  40% {color: rgb(80, 138, 80)}*/
-/*  60% {color: rgb(217, 219, 67)}*/
-/*  70% {color: rgb(255, 166, 0)}*/
-/*  75% {color: red} 80% {} 85%{color: red} 90% {color: black}*/
-/*  92% {color: red} 94% {color: black} 95% {color: red}96%{color: black} 97% {color: red}98%{color: black} 99% {color: red}*/
-/*}*/
 @keyframes timerAnim {
-  0% {  background: linear-gradient(right, green 100%, transparent 0%)}
-  10% {  background: linear-gradient(right, green 90%, transparent 10%);}
-  20% {  background: linear-gradient(right, green 80%, transparent 20%);}
-  30% {  background: linear-gradient(right, green 70%, transparent 30%);}
-  40% {  background: linear-gradient(right, green 60%, transparent 40%);}
-  50% {  background: linear-gradient(right, green 50%, transparent 50%);}
-  60% {  background: linear-gradient(right, green 40%, transparent 60%);}
-  70% {  background: linear-gradient(right, green 30%, transparent 70%);}
-  80% {  background: linear-gradient(right, green 20%, transparent 80%);}
-  90% {  background: linear-gradient(right, green 10%, transparent 90%);}
-  100% {  background: linear-gradient(right, red 100%, transparent 0%);}
+  0% {color: green}
+  40% {color: rgb(80, 138, 80)}
+  60% {color: rgb(217, 219, 67)}
+  70% {color: rgb(255, 166, 0)}
+  75% {color: red} 80% {} 85%{color: red} 90% {color: black}
+  92% {color: red} 94% {color: black} 95% {color: red}96%{color: black} 97% {color: red}98%{color: black} 99% {color: red}
 }
+
 #next{
   width: 170px;
   height: 170px;
