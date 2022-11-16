@@ -60,7 +60,7 @@ const ALL_PLACES = ["77 Mac",
         "Dupre",
         "George Draper Dayton",
         "Kirk",
-        "Turk",
+        "Turck",
         "Wallace"]
 export default {
   components: {
@@ -95,7 +95,7 @@ export default {
         ["Markim", [0,1]],
         ["Old Main", [0,1,2,3,4,5,]],
         ["Olin Rice", [0,1,2,3,4,5,6,7,8,9,10,11,12]],
-        ["Turk", [0,1]],
+        ["Turck", [0,1]],
         ["Wallace", [0,1]],
         ["Weyerhaeuser", [0,1,2,3,4]]
       ]),
