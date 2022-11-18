@@ -1,6 +1,6 @@
 <template>
-  <div class="navBar">
-    <!-- <img alt="FunQuizGame Logo" class="logo" src="src/assets/images/logo.png" width="25" height="25" /> -->
+  <div class="navBar"> 
+      <img alt="FunQuizGame Logo" class="logo" src="src/assets/images/logo-test.png" />
     <router-link id="homeBtn" to="/">FunQuizGame</router-link>
   </div>
   <div class="container">
@@ -427,7 +427,12 @@ button{
   75% {color: red} 80% {} 85%{color: red} 90% {color: black}
   92% {color: red} 94% {color: black} 95% {color: red}96%{color: black} 97% {color: red}98%{color: black} 99% {color: red}
 }
-
+.logo{
+  width: 10vmin;
+  padding: 0;
+  margin: 0;
+  vertical-align: middle;
+}
 #next{
   width: 170px;
   height: 170px;
