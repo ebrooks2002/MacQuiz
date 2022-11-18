@@ -74,7 +74,7 @@ export default {
       imageMap: new Map([
         ["30 Mac", ["00"]],
         ["77 Mac", ["00"]],
-        ["Bell", []],
+        // ["Bell", []],
         ["Bigelow", ["00"]],
         ["Campus Center", ["00", "01"]],
         ["Carnegie", ["00", "01"]],
@@ -223,7 +223,7 @@ export default {
       const randomImageName = buildingPicutresList[randomImageIndex]
       const path = "src/assets/images/"
       const img = path + tag + "/" + buildingName + "/" + randomImageName + ".jpg"
-      console.log(img)
+      // console.log(img)
       return img
     },
     nextClick: function() {
