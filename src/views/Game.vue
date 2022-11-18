@@ -222,7 +222,7 @@ export default {
       const randomImageName = buildingPicutresList[randomImageIndex]
       const path = "src/assets/images/"
       const img = path + tag + "/" + buildingName + "/" + randomImageName + ".jpg"
-      console.log(img)
+      // console.log(img)
       return img
     },
     nextClick: function() {
