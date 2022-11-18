@@ -2,7 +2,6 @@
 export default {
 //
 }
-// import 'animate.css';
 </script>
 <template>
     <div class = "home">

@@ -4,6 +4,7 @@ import TheNavigation from '@/components/TheNavigation.vue'
 export default{
   components: {TheNavigation}
 }
+import "animate.css"
 </script>
 
 <template>

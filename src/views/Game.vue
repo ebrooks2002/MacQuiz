@@ -1,15 +1,15 @@
 <template>
   <div class="navBar">
-    <!-- <img alt="FunQuizGame Logo" class="logo" src="src/assets/images/logo.png" width="25" height="25" /> -->
+    <img alt="FunQuizGame Logo" class="logo" src="src/assets/images/logo-test.png" />
     <router-link id="homeBtn" to="/">FunQuizGame</router-link>
   </div>
   <div class="container">
     <finished
-      v-if="buttonTrigger"
-      :score = "score"
-      :TogglePopup = "resetGame"
-      :scoreSave = "scoreSaved"
-      :scoreSaved = "toggleScoreSavedTrue"
+        v-if="buttonTrigger"
+        :score = "score"
+        :TogglePopup = "resetGame"
+        :scoreSave = "scoreSaved"
+        :scoreSaved = "toggleScoreSavedTrue"
     >
     </finished>
     <div class = "flexBox" id="image">
@@ -20,7 +20,7 @@
         Score:{{ score }}
       </div>
       <div class="timerInfo" id="timer">
-<!--        Timer: <span ref="points"> {{timerCount}}</span>-->
+        <!--        Timer: <span ref="points"> {{timerCount}}</span>-->
 
         <div id="timerVisual" class = "color">
 
@@ -43,28 +43,28 @@ import { ref } from 'vue';
 
 const TOTAL_NUMBER = 0 //delete
 const ALL_PLACES = ["77 Mac",
-        "Bell",
-        "Campus Center",
-        "Carnegie",
-        "Chapel",
-        "DeWitt Wallace Library",
-        "Humanities",
-        "Janet Wallace",
-        "Kagin",
-        "Leonard Center",
-        "Link",
-        "Markim",
-        "Old Main",
-        "Olin Rice",
-        "Weyerhaeuser",
-        "30 Mac",
-        "Bigelow",
-        "Doty",
-        "Dupre",
-        "George Draper Dayton",
-        "Kirk",
-        "Turk",
-        "Wallace"]
+  "Bell",
+  "Campus Center",
+  "Carnegie",
+  "Chapel",
+  "DeWitt Wallace Library",
+  "Humanities",
+  "Janet Wallace",
+  "Kagin",
+  "Leonard Center",
+  "Link",
+  "Markim",
+  "Old Main",
+  "Olin Rice",
+  "Weyerhaeuser",
+  "30 Mac",
+  "Bigelow",
+  "Doty",
+  "Dupre",
+  "George Draper Dayton",
+  "Kirk",
+  "Turk",
+  "Wallace"]
 export default {
   components: {
     "finished": Finished,
@@ -297,46 +297,46 @@ export default {
     //     document.getElementById("timerVisual").className = ""
     //   }
     // },
-  resetClasses: function () {
-    document.getElementById("option4").className = "non"
-    document.getElementById("option2").className = "non"
-    document.getElementById("option3").className = "non"
-    document.getElementById("option1").className = "non"
-  },
-  checkIfCorrect: function () {
-    if (this.clickedBtn !== undefined) {
-      let btn = document.getElementById(this.clickedBtn)
-      if (btn.className === 'correct') {
-        this.score += this.timerCount
-        return
-      }
-    }
-    this.lives--
-  },
-
-  start() {
-    this.timerCount = 1000
-    this.isRunning = true
-    if (!this.timer) {
-      this.timer = setInterval(() => {
-        if (this.timerCount > 0) {
-          this.timerCount--
-        } else {
-          this.stop()
-          this.optionBtn()
+    resetClasses: function () {
+      document.getElementById("option4").className = "non"
+      document.getElementById("option2").className = "non"
+      document.getElementById("option3").className = "non"
+      document.getElementById("option1").className = "non"
+    },
+    checkIfCorrect: function () {
+      if (this.clickedBtn !== undefined) {
+        let btn = document.getElementById(this.clickedBtn)
+        if (btn.className === 'correct') {
+          this.score += this.timerCount
+          return
         }
-      }, 10)
-    }
-  },
-  stop() {
-    this.isRunning = false
-    clearInterval(this.timer)
-    this.timer = null
-  },
-}
+      }
+      this.lives--
+    },
+
+    start() {
+      this.timerCount = 1000
+      this.isRunning = true
+      if (!this.timer) {
+        this.timer = setInterval(() => {
+          if (this.timerCount > 0) {
+            this.timerCount--
+          } else {
+            this.stop()
+            this.optionBtn()
+          }
+        }, 10)
+      }
+    },
+    stop() {
+      this.isRunning = false
+      clearInterval(this.timer)
+      this.timer = null
+    },
+  }
 }
 Array.prototype.random = function () { // returns radom item in an array
-    return this[Math.floor((Math.random() * this.length))];
+  return this[Math.floor((Math.random() * this.length))];
 
 }
 </script>
@@ -429,8 +429,8 @@ button{
   transition-property: width,height,background-color;
 }
 .non:hover{
- background-color: orange;
- transition: 0.2s;
+  background-color: orange;
+  transition: 0.2s;
 }
 
 #timer{
@@ -444,7 +444,7 @@ button{
   /*margin-left: 10px;*/
   /*margin-top: 10px;*/
   /*font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;*/
-  
+
 }
 /*.timerInfo{*/
 /*  animation-name: timerAnim;*/
@@ -486,6 +486,7 @@ button{
   75% {color: red} 80% {} 85%{color: red} 90% {color: black}
   92% {color: red} 94% {color: black} 95% {color: red}96%{color: black} 97% {color: red}98%{color: black} 99% {color: red}
 }
+
 .timer25{
   background-color: blue;
   width: 75%;
@@ -505,6 +506,12 @@ button{
   border-radius: 15px;
 }
 
+.logo{
+  width: 10vmin;
+  padding: 0;
+  margin: 0;
+  vertical-align: middle;
+}
 #next{
   width: 170px;
   height: 170px;
