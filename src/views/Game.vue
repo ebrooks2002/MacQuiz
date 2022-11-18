@@ -96,6 +96,7 @@ export default {
         ["Wallace", ["00", "01"]],
         ["Weyerhaeuser", ["00","01","02","03","04"]]
       ]),
+      picsUsed: [],
       image: null,
       correctAns: null,
       clickedBtn: null,
