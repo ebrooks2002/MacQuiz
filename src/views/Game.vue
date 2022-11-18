@@ -74,7 +74,7 @@ export default {
       imageMap: new Map([
         ["30 Mac", ["00"]],
         ["77 Mac", ["00"]],
-        ["Bell", []],
+        // ["Bell", []],
         ["Bigelow", ["00"]],
         ["Campus Center", ["00", "01"]],
         ["Carnegie", ["00", "01"]],
