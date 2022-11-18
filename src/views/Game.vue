@@ -17,9 +17,14 @@
     </div>
     <div class = "flexBox" id="options">
       <div id="info" >
-        Score:{{ score }} 
+        Score:{{ score }}
       </div>
-      <div class="timerInfo" id="timer"> Timer: <span ref="points"> {{timerCount}}</span>
+      <div class="timerInfo" id="timer">
+<!--        Timer: <span ref="points"> {{timerCount}}</span>-->
+
+        <div id="timerVisual" class = "color">
+
+        </div>
       </div>
       <v-button id="option1" :onclick ="optionBtn" :option= "options[0]" class="non" :disabled="display"></v-button>
       <v-button id="option2" :onclick="optionBtn"  :option= "options[1]" class="non" :disabled="display"></v-button>
@@ -62,8 +67,8 @@ const ALL_PLACES = ["77 Mac",
         "Wallace"]
 export default {
   components: {
-    "finished":Finished,
-    "v-button":VButton
+    "finished": Finished,
+    "v-button": VButton
   },
   data() {
     return {
@@ -79,22 +84,22 @@ export default {
         ["Campus Center", ["00", "01"]],
         ["Carnegie", ["00", "01"]],
         //["Chapel", []],
-        ["DeWitt Wallace Library", ["00","01","02","03","04","05","06","07","08","09","10"]],
+        ["DeWitt Wallace Library", ["00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10"]],
         //["Doty", []],
-        ["Dupre", ["00","01","02","03"]],
+        ["Dupre", ["00", "01", "02", "03"]],
         ["George Draper Dayton", ["00"]],
-        ["Humanities", ["00","01","02"]],
-        ["Janet Wallace", ["00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15"]],
+        ["Humanities", ["00", "01", "02"]],
+        ["Janet Wallace", ["00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15"]],
         ["Kagin", ["00", "01"]],
         ["Kirk", ["00", "01"]],
-        ["Leonard Center", ["00","01","02","03","04","05","06","07","08"]],
+        ["Leonard Center", ["00", "01", "02", "03", "04", "05", "06", "07", "08"]],
         ["Link", ["00"]],
         ["Markim", ["00", "01"]],
-        ["Old Main", ["00","01","02","03","04","05"]],
-        ["Olin Rice", ["00","01","02","03","04","05","06","07","08","09","10","11","12"]],
+        ["Old Main", ["00", "01", "02", "03", "04", "05"]],
+        ["Olin Rice", ["00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"]],
         ["Turck", ["00", "01"]],
         ["Wallace", ["00", "01"]],
-        ["Weyerhaeuser", ["00","01","02","03","04"]]
+        ["Weyerhaeuser", ["00", "01", "02", "03", "04"]]
       ]),
       picsUsed: [],
       image: null,
@@ -107,30 +112,30 @@ export default {
       isRunning: false,
       lives: 3,
       buttonTrigger: false,
-      scoreSaved:false
+      scoreSaved: false
     }
   },
-  created: function() {
-      this.isRunning = true
-      if (!this.timer) {
-        this.timer = setInterval(() => {
-          if (this.timerCount > 0) {
-            this.timerCount--
-          } else {
-            this.stop()
-            this.optionBtn()
-          }
-        }, 10)
-      }
-    },
+  created: function () {
+    this.isRunning = true
+    if (!this.timer) {
+      this.timer = setInterval(() => {
+        if (this.timerCount > 0) {
+          this.timerCount--
+        } else {
+          this.stop()
+          this.optionBtn()
+        }
+      }, 10)
+    }
+  },
   computed: {
     options() {
       let places = this.places
       let arr = []
       let i = 0
-      while (arr.length < 4){
+      while (arr.length < 4) {
         let index = Math.floor(Math.random() * this.places.length)
-        if (!arr.includes(places[index])  && places[index] !== this.correctAns){
+        if (!arr.includes(places[index]) && places[index] !== this.correctAns) {
           arr[i] = places[index]
           i++
         }
@@ -141,59 +146,62 @@ export default {
     }
   },
   mounted() {
+    this.picsUsed = []
     this.image = this.randomImg()
-    this.options[0], this.options[1],this.options[2], this.options[3] = this.randomOption2()
+    this.options[0], this.options[1], this.options[2], this.options[3] = this.randomOption2()
     this.places = ALL_PLACES
     this.correctAns = this.correctAnswer()
     this.randomPlaces = this.randomOption2()
+
   },
   methods: {
-    toggleScoreSavedTrue: function (){
+    toggleScoreSavedTrue: function () {
       this.scoreSaved = true
     },
 
-    resetGame: function (){
-          this.score = 0
-          this.image = null
-          this.correctAns = null
-          this.clickedBtn = null
-          this.timerCount = 1000
-          this.stopTimer = false
-          this.points = 0
-          this.timer = null
-          this.isRunning = false
-          this.lives = 3
-          this.buttonTrigger = false
+    resetGame: function () {
+      this.score = 0
+      this.image = null
+      this.correctAns = null
+      this.clickedBtn = null
+      this.timerCount = 1000
+      this.stopTimer = false
+      this.points = 0
+      this.timer = null
+      this.isRunning = false
+      this.lives = 3
+      this.buttonTrigger = false
       this.scoreSaved = false
+      this.picsUsed = []
       this.nextClick()
-
     },
-    optionBtn: function(event) {
+    optionBtn: function (event) {
 
       this.showCorrectAnswer()
       this.display = !this.display
-      this.clickedBtn = (event !== undefined) ? event.target.id:undefined
+      this.clickedBtn = (event !== undefined) ? event.target.id : undefined
       this.stopTimer = true
       this.stop()
       this.checkIfCorrect()
+      document.getElementById("timerVisual").style.animationPlayState = "paused"
       if (this.lives <= 0)
         this.TogglePopup()
 
       document.getElementById('timer').className = ''
     },
-    toggleDisplay: function (){
+    toggleDisplay: function () {
       this.display = !this.display
     },
-    TogglePopup: function (){
+    TogglePopup: function () {
       this.buttonTrigger = !this.buttonTrigger
     },
-    randomOption2: function() {
+    randomOption2: function () {
       let places = this.places
       let arr = []
       let i = 0
-      while (arr.length < 4){
+      while (arr.length < 4) {
         let index = Math.floor(Math.random() * this.places.length)
-        if (!arr.includes(places[index]) && places[index] !== this.correctAns){
+        if (!arr.includes(places[index]) && places[index] !== this.correctAns) {
           arr[i] = places[index]
           i++
         }
@@ -202,10 +210,10 @@ export default {
       arr[correctIndex] = this.correctAns
       return arr
     },
-    randomImg: function() {
+    randomImg: function () {
       let tag = ""
       let randomImageMap = this.imageMap
-      switch(Math.floor(Math.random()*2)) {
+      switch (Math.floor(Math.random() * 2)) {
         case 0:
           // randomImageMap = this.imageMap
           tag = "reg"
@@ -219,14 +227,23 @@ export default {
       const keys = Array.from(imageMap.keys())
       const buildingName = keys.random()
       const buildingPicutresList = imageMap.get(buildingName)
-      const randomImageIndex = Math.floor(Math.random()*buildingPicutresList.length)
+      const randomImageIndex = Math.floor(Math.random() * buildingPicutresList.length)
       const randomImageName = buildingPicutresList[randomImageIndex]
       const path = "src/assets/images/"
       const img = path + tag + "/" + buildingName + "/" + randomImageName + ".jpg"
-      // console.log(img)
-      return img
+      console.log("----------------Break---------------------")
+      console.log(img)
+      console.log(this.picsUsed)
+      console.log(!this.picsUsed.includes(img))
+      if (!this.picsUsed.includes(img)) {
+        // console.log(img)
+        this.picsUsed.push(img)
+        return img
+      } else {
+        return this.randomImg()
+      }
     },
-    nextClick: function() {
+    nextClick: function () {
       this.toggleDisplay()
       this.resetClasses()
       this.image = this.randomImg()
@@ -240,76 +257,87 @@ export default {
       this.timerCount = 1000
       this.stopTimer = false
       document.getElementById('timer').className = 'timerInfo'
+      document.getElementById("timerVisual").style.animationName = ""
+      document.getElementById("timerVisual").style.animationName= "progress"
     },
-    correctAnswer: function() {
-      return this.image.slice(22, this.image.length-7)
+    correctAnswer: function () {
+      return this.image.slice(22, this.image.length - 7)
     },
-    showCorrectAnswer: function (){
-      if (this.options[0] === this.correctAns){
+    showCorrectAnswer: function () {
+      if (this.options[0] === this.correctAns) {
         document.getElementById("option1").className = "correct"
         document.getElementById("option2").className = "incorrect"
         document.getElementById("option3").className = "incorrect"
         document.getElementById("option4").className = "incorrect"
-      }
-      else if (this.options[1] === this.correctAns){
+      } else if (this.options[1] === this.correctAns) {
         document.getElementById("option2").className = "correct"
         document.getElementById("option1").className = "incorrect"
         document.getElementById("option3").className = "incorrect"
         document.getElementById("option4").className = "incorrect"
-      }
-      else if (this.options[2] === this.correctAns){
+      } else if (this.options[2] === this.correctAns) {
         document.getElementById("option3").className = "correct"
         document.getElementById("option2").className = "incorrect"
         document.getElementById("option1").className = "incorrect"
         document.getElementById("option4").className = "incorrect"
-      }
-      else if (this.options[3] === this.correctAns){
+      } else if (this.options[3] === this.correctAns) {
         document.getElementById("option4").className = "correct"
         document.getElementById("option2").className = "incorrect"
         document.getElementById("option3").className = "incorrect"
         document.getElementById("option1").className = "incorrect"
       }
     },
-    resetClasses: function() {
-      document.getElementById("option4").className = "non"
-      document.getElementById("option2").className = "non"
-      document.getElementById("option3").className = "non"
-      document.getElementById("option1").className = "non"
-    },
-    checkIfCorrect: function () {
-      if (this.clickedBtn !== undefined) {
-        let btn = document.getElementById(this.clickedBtn)
-        if (btn.className === 'correct') {
-          this.score += this.timerCount
-          return
-        }
+    // stopTimerVisual: function () {
+    //   if (this.timerCount > 750) {
+    //     document.getElementById("timerVisual").className = "timer25"
+    //   } else if (this.timerCount > 500) {
+    //     document.getElementById("timerVisual").className = "timer50"
+    //   } else if (this.timerCount > 250) {
+    //     document.getElementById("timerVisual").className = "timer75"
+    //   } else {
+    //     document.getElementById("timerVisual").className = ""
+    //   }
+    // },
+  resetClasses: function () {
+    document.getElementById("option4").className = "non"
+    document.getElementById("option2").className = "non"
+    document.getElementById("option3").className = "non"
+    document.getElementById("option1").className = "non"
+  },
+  checkIfCorrect: function () {
+    if (this.clickedBtn !== undefined) {
+      let btn = document.getElementById(this.clickedBtn)
+      if (btn.className === 'correct') {
+        this.score += this.timerCount
+        return
       }
-      this.lives--
-    },
+    }
+    this.lives--
+  },
 
-    start() {
-      this.timerCount = 1000
-      this.isRunning = true
-      if (!this.timer) {
-        this.timer = setInterval(() => {
-          if (this.timerCount > 0) {
-            this.timerCount--
-          } else {
-            this.stop()
-            this.optionBtn()
-          }
-        }, 10)
-      }
-    },
-    stop () {
-      this.isRunning = false
-      clearInterval(this.timer)
-      this.timer = null
-    },
-  }
+  start() {
+    this.timerCount = 1000
+    this.isRunning = true
+    if (!this.timer) {
+      this.timer = setInterval(() => {
+        if (this.timerCount > 0) {
+          this.timerCount--
+        } else {
+          this.stop()
+          this.optionBtn()
+        }
+      }, 10)
+    }
+  },
+  stop() {
+    this.isRunning = false
+    clearInterval(this.timer)
+    this.timer = null
+  },
+}
 }
 Array.prototype.random = function () { // returns radom item in an array
-  return this[Math.floor((Math.random()*this.length))];
+    return this[Math.floor((Math.random() * this.length))];
+
 }
 </script>
 
@@ -406,20 +434,50 @@ button{
 }
 
 #timer{
-  position: fixed;
-  display: flex;
-  flex-wrap: wrap;
-  padding-left: 20px;
-  margin-left: 10px;
-  margin-top: 10px;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+  height: 10px;
+  width: 90%;
+  border: 10px solid red;
+  border-radius: 15px;
+  margin: auto;
+  /*padding-left: 20px;*/
+  /*margin-left: 10px;*/
+  /*margin-top: 10px;*/
+  /*font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;*/
   
 }
-.timerInfo{
-  animation-name: timerAnim;
+/*.timerInfo{*/
+/*  animation-name: timerAnim;*/
+/*  animation-duration: 10s;*/
+/*}*/
+#timerVisual{
+  background-color: blue;
+  width: 0px;
+  height: 10px;
+  border-radius: 15px;
+  animation-name: progress;
   animation-duration: 10s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-play-state: running;
 }
-
+@keyframes progress{
+  0%{
+    width: 100%;
+  }
+  25%{
+    width: 75%;
+  }
+  50%{
+    width: 50%;
+  }
+  75%{
+    width: 25%;
+  }
+  100%{
+    width: 0%;
+  }
+}
 @keyframes timerAnim {
   0% {color: green}
   40% {color: rgb(80, 138, 80)}
@@ -427,6 +485,24 @@ button{
   70% {color: rgb(255, 166, 0)}
   75% {color: red} 80% {} 85%{color: red} 90% {color: black}
   92% {color: red} 94% {color: black} 95% {color: red}96%{color: black} 97% {color: red}98%{color: black} 99% {color: red}
+}
+.timer25{
+  background-color: blue;
+  width: 75%;
+  height: 10px;
+  border-radius: 15px;
+}
+.timer50{
+  background-color: blue;
+  width: 50%;
+  height: 10px;
+  border-radius: 15px;
+}
+.timer75{
+  background-color: blue;
+  width: 25%;
+  height: 10px;
+  border-radius: 15px;
 }
 
 #next{
