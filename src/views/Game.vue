@@ -1,6 +1,6 @@
 <template>
   <div class="navBar">
-    <img alt="FunQuizGame Logo" class="logo" src="src/assets/images/logo-test.png" />
+    <router-link id="homeBtn" to="/"><img alt="FunQuizGame Logo" class="logo" src="src/assets/images/logo-test.png"/></router-link>
     <router-link id="homeBtn" to="/">FunQuizGame</router-link>
   </div>
   <div class="container">
