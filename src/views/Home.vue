@@ -5,8 +5,7 @@ export default {
 </script>
 <template>
     <div class = "home">
-        <h1 >Home</h1>
-        <h2 >Welcome to the best new Macalester game!</h2>
+        <h2 class="header">Welcome to the best new Macalester game!</h2>
         <!-- https://codingbeautydev.com/blog/vue-router-link-button/ -->
         <!-- <img alt="FunQuizGame Logo" class="logo" src="src/assets/images/logo.png" width="125" height="125" /> -->
         <router-link
@@ -15,7 +14,8 @@ export default {
             v-slot="{ navigate }">
                 <button
                 @click="navigate"
-                role="link">
+                role="link"
+                id="hb">
                     Play the game!</button>
         </router-link>
     </div>
@@ -30,18 +30,53 @@ export default {
         font-size: larger;
     }
 
-    button{
-        border-radius: 10px;
-        background-color: rgb(255, 255, 255);
-        width: 150px;
-        background-color: #01426A;
-        height: 50px;
-        margin: 7px;
-        box-sizing: border-box;
-        -webkit-text-fill-color: white;
+    #hb{
+      border-radius: 10px;
+      background-color: rgb(255, 255, 255);
+      width: 150px;
+      background-color: #01426A;
+      height: 50px;
+      box-sizing: border-box;
+      -webkit-text-fill-color: white;
+
+      position: absolute;
+      top: 25%;
+      left: -50%;
+      overflow: hidden;
+      transform: translate(-50%, -50%);
+      animation-name: slidein;
+      animation-duration: 2s;
+      animation-delay: 2s;
+      animation-fill-mode: forwards;
     }
     button:hover{
         background-color: #3d7ba1;
     }
+    .header{
+      position: absolute;
+      animation-name: fadein;
+      animation-duration: 2s;
+      top: 10%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    @keyframes fadein {
+      0%{
+        opacity: 0;
+      }
+      100%{
+        opacity: 100%;
+      }
 
+    }
+
+    @keyframes slidein {
+      0% {
+        left: -20%;
+      }
+      100%{
+        left: 50%;
+      }
+
+    }
 </style>

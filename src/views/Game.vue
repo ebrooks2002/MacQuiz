@@ -20,7 +20,7 @@
         Score:{{ score }}
       </div>
       <div class="timerInfo" id="timer">
-        <!--        Timer: <span ref="points"> {{timerCount}}</span>-->
+                 <span id="points"> {{timerCount}}</span>
 
         <div id="timerVisual" class = "color">
 
@@ -183,11 +183,11 @@ export default {
       this.stopTimer = true
       this.stop()
       this.checkIfCorrect()
-      document.getElementById("timerVisual").style.animationPlayState = "paused"
+      document.querySelector(".color").style.animationPlayState = "paused"
       if (this.lives <= 0)
         this.TogglePopup()
 
-      document.getElementById('timer').className = ''
+
     },
     toggleDisplay: function () {
       this.display = !this.display
@@ -244,6 +244,8 @@ export default {
       }
     },
     nextClick: function () {
+      document.querySelector("#timerVisual").className = ''
+      document.querySelector('#timerVisual').offsetWidth
       this.toggleDisplay()
       this.resetClasses()
       this.image = this.randomImg()
@@ -256,9 +258,11 @@ export default {
       this.options[3] = options[3]
       this.timerCount = 1000
       this.stopTimer = false
-      document.getElementById('timer').className = 'timerInfo'
-      document.getElementById("timerVisual").style.animationName = ""
-      document.getElementById("timerVisual").style.animationName= "progress"
+
+      document.querySelector("#timerVisual").className= "color"
+      document.querySelector(".color").style.animationPlayState = "running"
+
+
     },
     correctAnswer: function () {
       return this.image.slice(22, this.image.length - 7)
@@ -411,6 +415,7 @@ img{
   align-content: stretch;
   flex-shrink: calc(0);
   max-height: 500px;
+
 }
 button{
   width: 21vmax;
@@ -427,7 +432,10 @@ button{
   border-width: 5px;
   border-color: rgba(191, 155, 239, 0.554);
   transition-property: width,height,background-color;
-}
+  margin: 7px;
+
+  -webkit-text-fill-color: white;
+  }
 .non:hover{
   background-color: orange;
   transition: 0.2s;
@@ -435,11 +443,11 @@ button{
 
 #timer{
 
-  height: 10px;
+  height: 19px;
   width: 90%;
   border: 10px solid red;
   border-radius: 15px;
-  margin: auto;
+  padding: 0px;
   /*padding-left: 20px;*/
   /*margin-left: 10px;*/
   /*margin-top: 10px;*/
@@ -450,17 +458,24 @@ button{
 /*  animation-name: timerAnim;*/
 /*  animation-duration: 10s;*/
 /*}*/
-#timerVisual{
+
+#points{
+  position: absolute;
+}
+
+.color{
   background-color: blue;
+  /*margin: auto;*/
   width: 0px;
-  height: 10px;
-  border-radius: 15px;
+  height: 20px;
+  border-radius: 8px;
   animation-name: progress;
   animation-duration: 10s;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
   animation-play-state: running;
 }
+
 @keyframes progress{
   0%{
     width: 100%;

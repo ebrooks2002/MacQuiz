@@ -211,6 +211,14 @@ export default {
 
 button{
   background-color: #D44420;
+  border-radius: 10px;
+  box-sizing: border-box;
+  -webkit-text-fill-color: white;
+  width: 150px;
+  height: 50px;
+  margin: 7px;
+
+
 }
 
 </style>
