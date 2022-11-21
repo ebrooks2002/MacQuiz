@@ -124,6 +124,7 @@ export default {
         } else {
           this.stop()
           this.optionBtn()
+          document.querySelector('#timerVisual').className = ''
         }
       }, 10)
     }
@@ -442,12 +443,11 @@ button{
 }
 
 #timer{
-
+  position: relative;
   height: 19px;
   width: 90%;
-  border: 10px solid red;
+  border: 10px solid #f4a261;
   border-radius: 15px;
-  padding: 0px;
   /*padding-left: 20px;*/
   /*margin-left: 10px;*/
   /*margin-top: 10px;*/
@@ -464,14 +464,16 @@ button{
 }
 
 .color{
-  background-color: blue;
+  background-color: green;
   /*margin: auto;*/
   width: 0px;
-  height: 20px;
-  border-radius: 8px;
+  height: 100%;
+  margin: 0px;
+  border-radius: 6px;
+
   animation-name: progress;
   animation-duration: 10s;
-  animation-iteration-count: infinite;
+  animation-iteration-count: 1;
   animation-timing-function: linear;
   animation-play-state: running;
 }
@@ -483,14 +485,23 @@ button{
   25%{
     width: 75%;
   }
+  40% {
+    background-color: orange;
+  }
+
   50%{
     width: 50%;
+    background-color: orange;
   }
+
   75%{
     width: 25%;
+    color: red
   }
+
   100%{
     width: 0%;
+    background-color: red;
   }
 }
 @keyframes timerAnim {

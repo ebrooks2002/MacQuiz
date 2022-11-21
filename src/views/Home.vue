@@ -4,8 +4,10 @@ export default {
 }
 </script>
 <template>
-    <div class = "home">
-        <h2 class="header">Welcome to the best new Macalester game!</h2>
+  <head>
+    <link href="https://fonts.googleapis.com/css2?family=Stalinist+One&display=swap" rel="stylesheet">  </head>
+  <div class = "home">
+        <h1 class="header">Fun Quiz Game</h1>
         <!-- https://codingbeautydev.com/blog/vue-router-link-button/ -->
         <!-- <img alt="FunQuizGame Logo" class="logo" src="src/assets/images/logo.png" width="125" height="125" /> -->
         <router-link
@@ -16,12 +18,16 @@ export default {
                 @click="navigate"
                 role="link"
                 id="hb">
-                    Play the game!</button>
+                    Play!</button>
         </router-link>
     </div>
 </template>
 
 <style>
+    @font-face {
+      font-family: Diplomata;
+      src: url("https://fonts.google.com/specimen/Diplomata?thickness=9");
+    }
     body{background-color:#d9ecff;}
     .home{
         text-align: center;
@@ -40,7 +46,7 @@ export default {
       -webkit-text-fill-color: white;
 
       position: absolute;
-      top: 25%;
+      top: 50%;
       left: -50%;
       overflow: hidden;
       transform: translate(-50%, -50%);
@@ -53,10 +59,11 @@ export default {
         background-color: #3d7ba1;
     }
     .header{
+      font-family: Stalinist One;
       position: absolute;
       animation-name: fadein;
       animation-duration: 2s;
-      top: 10%;
+      top: 35%;
       left: 50%;
       transform: translate(-50%, -50%);
     }
