@@ -3,7 +3,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <div class="navBar">
-    <img alt="FunQuizGame Logo" class="logo" src="src/assets/images/logo-test.png" />
+    <router-link id="homeBtn" to="/"><img alt="FunQuizGame Logo" class="logo" src="src/assets/images/logo-test.png"/></router-link>
     <router-link id="homeBtn" to="/">FunQuizGame</router-link>
   </div>
   <div class="container">
