@@ -1,4 +1,7 @@
 <template>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
   <div class="navBar">
     <img alt="FunQuizGame Logo" class="logo" src="src/assets/images/logo-test.png" />
     <router-link id="homeBtn" to="/">FunQuizGame</router-link>
@@ -445,9 +448,10 @@ button{
 #timer{
   position: relative;
   height: 19px;
-  width: 90%;
+  width: 440px;
   border: 10px solid #f4a261;
   border-radius: 15px;
+  margin-left: 5px;
   /*padding-left: 20px;*/
   /*margin-left: 10px;*/
   /*margin-top: 10px;*/

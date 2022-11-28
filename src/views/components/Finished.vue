@@ -20,6 +20,7 @@
           <td>{{user[0]}}</td>
           <td>{{user[1]}}</td>
         </tr>
+
         </tbody>
       </table>
       <input
@@ -84,18 +85,25 @@ export default {
     score: null,
     scoreSaved: null,
     scoreSave: null,
+
   },
 
 
   data() {
     return {
       text: '',
-      leaderboard: []
+      leaderboard: [],
+      realUserName: null,
+      rank: null
     }
+  },
+
+  computed: {
   },
 
   created() {
     this.leaderboard = this.getLeaderboard()
+    this.realUserName = this.username
   },
   mounted() {
   },
@@ -124,13 +132,23 @@ export default {
             }
         ))
       })
+
       leaderboard = leaderboard.sort(function(a,b) { return a[1] - b[1]; });
+      console.log(this.realUserName)
+      // this.rank = this.indexOf(leaderboard, [ this.$refs.inputField.value, this.score])
       leaderboard = leaderboard.slice(-10)
       leaderboard.reverse()
       return leaderboard
+    },
+    indexOf: function (array, item){
+      for (let i = 0; i < array.length; i++){
+        if (array[i][0] == item[0] && array[i][1] == item[1]){
+          return i
+        }
+      }
+
     }
   },
-
 
 }
 </script>
