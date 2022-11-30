@@ -63,7 +63,7 @@ const ALL_PLACES = ["77 Mac",
   "Dupre",
   "George Draper Dayton",
   "Kirk",
-  "Turk",
+  "Turck",
   "Wallace"]
 export default {
   components: {
@@ -153,7 +153,6 @@ export default {
     this.places = ALL_PLACES
     this.correctAns = this.correctAnswer()
     this.randomPlaces = this.randomOption2()
-
   },
   methods: {
     toggleScoreSavedTrue: function () {
@@ -177,7 +176,6 @@ export default {
       this.nextClick()
     },
     optionBtn: function (event) {
-
       this.showCorrectAnswer()
       this.display = !this.display
       this.clickedBtn = (event !== undefined) ? event.target.id : undefined
@@ -188,9 +186,8 @@ export default {
       
       if (this.lives <= 0)
         this.TogglePopup()
-
-      document.querySelector("#image").style.animationPlayState = "paused";
     },
+
     toggleDisplay: function () {
       this.display = !this.display
     },
@@ -260,17 +257,9 @@ export default {
       this.options[3] = options[3]
       this.timerCount = 1000
       this.stopTimer = false
-
       document.querySelector("#timerVisual").className= "color"
       document.querySelector(".color").style.animationPlayState = "running"
 
-      document.querySelector("#image").style.animationPlayState = "running"
-      stopAnim()
-    },
-    stopAnim: function(){
-      setTimeout(function(){
-        document.querySelector("#image").style.animationPlayState = "pause";
-      }, 2000);
     },
     correctAnswer: function () {
       return this.image.slice(22, this.image.length - 7)
@@ -351,7 +340,6 @@ Array.prototype.random = function () { // returns radom item in an array
   return this[Math.floor((Math.random() * this.length))];
 
 }
-
 
 
 </script>
