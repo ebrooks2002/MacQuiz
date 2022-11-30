@@ -11,7 +11,7 @@
     "bootstrap": "^5.2.2",
     "bootstrap-vue": "^2.23.1",
     "exif-js": "^2.3.0",
-    "firebase": "^9.12.1",
+    "firebase": "^9.14.0",
     "imagvue": "^0.0.5",
     "operator": "^1.8.0",
     "vue": "^3.2.38",

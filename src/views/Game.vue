@@ -185,10 +185,11 @@ export default {
       this.stop()
       this.checkIfCorrect()
       document.querySelector(".color").style.animationPlayState = "paused"
+      
       if (this.lives <= 0)
         this.TogglePopup()
 
-
+      document.querySelector("#image").style.animationPlayState = "paused";
     },
     toggleDisplay: function () {
       this.display = !this.display
@@ -263,7 +264,13 @@ export default {
       document.querySelector("#timerVisual").className= "color"
       document.querySelector(".color").style.animationPlayState = "running"
 
-
+      document.querySelector("#image").style.animationPlayState = "running"
+      stopAnim()
+    },
+    stopAnim: function(){
+      setTimeout(function(){
+        document.querySelector("#image").style.animationPlayState = "pause";
+      }, 2000);
     },
     correctAnswer: function () {
       return this.image.slice(22, this.image.length - 7)
@@ -344,6 +351,9 @@ Array.prototype.random = function () { // returns radom item in an array
   return this[Math.floor((Math.random() * this.length))];
 
 }
+
+
+
 </script>
 
 <style scoped>
@@ -403,12 +413,20 @@ Array.prototype.random = function () { // returns radom item in an array
   border-style: dashed;
   border-width: 3px;
   border-color: rgb(0, 0, 0);
-  flex-shrink:calc(0)
+  flex-shrink:calc(0);
+
+  animation: bounce;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  /* animation-delay:4s; */
 }
+
+
 img{
   width: auto;
   height: 100%;
 }
+
 #options{
   margin-left: 10px;
   display: flex;
