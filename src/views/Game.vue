@@ -155,6 +155,11 @@ export default {
     this.randomPlaces = this.randomOption2()
   },
   methods: {
+    playClick: function(){
+      let click = new Audio('')
+      click.play()
+    },
+
     toggleScoreSavedTrue: function () {
       this.scoreSaved = true
     },
@@ -259,7 +264,7 @@ export default {
       this.stopTimer = false
       document.querySelector("#timerVisual").className= "color"
       document.querySelector(".color").style.animationPlayState = "running"
-
+      playClick()
     },
     correctAnswer: function () {
       return this.image.slice(22, this.image.length - 7)
@@ -405,7 +410,7 @@ Array.prototype.random = function () { // returns radom item in an array
 
   animation: bounce;
   animation-duration: 2s;
-  animation-iteration-count: infinite;
+  animation-iteration-count: 1;
   /* animation-delay:4s; */
 }
 
