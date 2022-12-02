@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@cloudinary/url-gen": "^1.8.6",
+    "animate.css": "^4.1.1",
     "bootstrap": "^5.2.2",
     "bootstrap-vue": "^2.23.1",
     "exif-js": "^2.3.0",

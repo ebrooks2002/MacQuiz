@@ -230,6 +230,8 @@ export default {
           // randomImageMap = this.pixelImageMap
           tag = "pix"
           // break
+        case 3:
+          tag = "inverted"
       }
       const imageMap = randomImageMap
       const keys = Array.from(imageMap.keys())
