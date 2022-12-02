@@ -65,6 +65,11 @@ const ALL_PLACES = ["77 Mac",
   "Kirk",
   "Turck",
   "Wallace"]
+
+  var click = new Audio("./src/assets/sounds/dud.wav")
+  var cd = new Audio("./src/assets/sounds/cd.wav")
+  var rightAnswer = new Audio("./src/assets/sounds/ding.wav")
+  var wrongAnswer = new Audio("./src/assets/sounds/nope.wav")
 export default {
   components: {
     "finished": Finished,
@@ -155,11 +160,6 @@ export default {
     this.randomPlaces = this.randomOption2()
   },
   methods: {
-    playClick: function(){
-      let click = new Audio('')
-      click.play()
-    },
-
     toggleScoreSavedTrue: function () {
       this.scoreSaved = true
     },
@@ -181,6 +181,8 @@ export default {
       this.nextClick()
     },
     optionBtn: function (event) {
+      cd.pause()
+
       this.showCorrectAnswer()
       this.display = !this.display
       this.clickedBtn = (event !== undefined) ? event.target.id : undefined
@@ -188,9 +190,9 @@ export default {
       this.stop()
       this.checkIfCorrect()
       document.querySelector(".color").style.animationPlayState = "paused"
-      
       if (this.lives <= 0)
         this.TogglePopup()
+      
     },
 
     toggleDisplay: function () {
@@ -215,6 +217,8 @@ export default {
       return arr
     },
     randomImg: function () {
+      cd.currentTime=0
+      cd.play()
       let tag = ""
       let randomImageMap = this.imageMap
       switch (Math.floor(Math.random() * 2)) {
@@ -248,6 +252,7 @@ export default {
       }
     },
     nextClick: function () {
+      click.play()
       document.querySelector("#timerVisual").className = ''
       document.querySelector('#timerVisual').offsetWidth
       this.toggleDisplay()
@@ -264,7 +269,7 @@ export default {
       this.stopTimer = false
       document.querySelector("#timerVisual").className= "color"
       document.querySelector(".color").style.animationPlayState = "running"
-      playClick()
+
     },
     correctAnswer: function () {
       return this.image.slice(22, this.image.length - 7)
@@ -314,9 +319,11 @@ export default {
         let btn = document.getElementById(this.clickedBtn)
         if (btn.className === 'correct') {
           this.score += this.timerCount
-          return
+          rightAnswer.play()
+          return 
         }
       }
+      wrongAnswer.play()
       this.lives--
     },
 
