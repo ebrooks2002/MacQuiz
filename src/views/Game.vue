@@ -66,10 +66,14 @@ const ALL_PLACES = ["77 Mac",
   "Turck",
   "Wallace"]
 
-  var click = new Audio("./src/assets/sounds/dud.wav")
+  var click = new Audio("./src/assets/sounds/click.wav")
   var cd = new Audio("./src/assets/sounds/cd.wav")
   var rightAnswer = new Audio("./src/assets/sounds/ding.wav")
+  var rightAnswer2 = new Audio("./src/assets/sounds/ding2.wav")
   var wrongAnswer = new Audio("./src/assets/sounds/nope.wav")
+  var wrongAnswer2 = new Audio("./src/assets/sounds/nope2.wav")
+  var wrongAnswer3 = new Audio("./src/assets/sounds/nope3.wav")
+
 export default {
   components: {
     "finished": Finished,
@@ -217,8 +221,12 @@ export default {
       return arr
     },
     randomImg: function () {
+
       cd.currentTime=0
       cd.play()
+      wrongAnswer3.pause()
+      wrongAnswer3.currentTime=0
+
       let tag = ""
       let randomImageMap = this.imageMap
       switch (Math.floor(Math.random() * 2)) {
@@ -252,6 +260,8 @@ export default {
       } else {
         return this.randomImg()
       }
+
+      
     },
     nextClick: function () {
       click.play()
@@ -321,12 +331,25 @@ export default {
         let btn = document.getElementById(this.clickedBtn)
         if (btn.className === 'correct') {
           this.score += this.timerCount
-          rightAnswer.play()
-          return 
+
+          if (this.score%7==0) {
+            rightAnswer2.play()}
+          else rightAnswer.play()
+
+          return
         }
       }
-      wrongAnswer.play()
       this.lives--
+      switch (this.lives){
+        case 2:
+          wrongAnswer.play()
+          break
+        case 1:
+          wrongAnswer2.play()
+          break
+        case 0: 
+          wrongAnswer3.play()
+      }
     },
 
     start() {
