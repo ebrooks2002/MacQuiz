@@ -12,6 +12,7 @@
           <th>Rank</th>
           <th>Name</th>
           <th>Score</th>
+          <th>Difficulty</th>
         </tr>
         </thead>
         <tbody>
@@ -19,6 +20,7 @@
           <td>{{ index + 1 }}</td>
           <td>{{user[0]}}</td>
           <td>{{user[1]}}</td>
+          <td>{{user[2]}}</td>
         </tr>
 
         </tbody>
@@ -94,7 +96,8 @@ export default {
       text: '',
       leaderboard: [],
       realUserName: null,
-      rank: null
+      rank: null,
+      level: null
     }
   },
 
@@ -104,6 +107,7 @@ export default {
   created() {
     this.leaderboard = this.getLeaderboard()
     this.realUserName = this.username
+    this.level = this.$store.state.level
   },
   mounted() {
   },
@@ -112,7 +116,8 @@ export default {
       console.log(this.leaderboard)
       push(ref(db, 'users/'),{
         username: this.$refs.inputField.value,
-        score: this.score
+        score: this.score,
+        level: this.$store.state.level
       }).then(() => {
         this.scoreSaved()
       }).catch((error) => {
@@ -128,7 +133,7 @@ export default {
       onValue(data, function (snapshot) {
         snapshot.forEach((
             function (ChildSnapShot){
-              leaderboard.push([ChildSnapShot.val().username, ChildSnapShot.val().score])
+              leaderboard.push([ChildSnapShot.val().username, ChildSnapShot.val().score, ChildSnapShot.val().level])
             }
         ))
       })

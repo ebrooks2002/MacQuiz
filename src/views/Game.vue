@@ -246,7 +246,7 @@ export default {
         tag = "pix"
 
       else if (this.$store.state.level === 'hard')
-        tag = "inverted"
+        tag = "inv"
 
       const imageMap = randomImageMap
       const keys = Array.from(imageMap.keys())
@@ -492,7 +492,7 @@ button{
   position: relative;
   height: 19px;
   width: 90%;
-  border: 10px solid #f4a261;
+  border: 10px solid #fc6e4aa4;
   border-radius: 15px;
   /*padding-left: 20px;*/
   /*margin-left: 10px;*/
