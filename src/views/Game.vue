@@ -237,7 +237,7 @@ export default {
       //   case this.$store.state.level === 'medium'|| this.$store.state.level === 'hard':
       //     // randomImageMap = this.pixelImageMap
       //     tag = "pix"
-      //     // break
+      //     // breakn
       // }
       if (this.$store.state.level === 'easy')
         tag = "reg"
