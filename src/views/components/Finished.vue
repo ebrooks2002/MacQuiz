@@ -56,7 +56,6 @@
 import { getDatabase, ref, set,push, query, orderByChild, onValue } from "firebase/database";
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -75,6 +74,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getDatabase();
+
 
 // Import Bootstrap and BootstrapVue CSS files (order is important)
 // import 'bootstrap/dist/css/bootstrap.css'

@@ -64,6 +64,14 @@ const ALL_PLACES = ["77 Mac",
   "Kirk",
   "Turk",
   "Wallace"]
+
+const click = new Audio("./src/assets/sounds/click.wav")
+const cd = new Audio("./src/assets/sounds/cd.wav")
+const rightAnswer = new Audio("./src/assets/sounds/ding.wav")
+const rightAnswer2 = new Audio("./src/assets/sounds/ding2.wav")
+const wrongAnswer = new Audio("./src/assets/sounds/nope.wav")
+const wrongAnswer2 = new Audio("./src/assets/sounds/nope2.wav")
+const wrongAnswer3 = new Audio("./src/assets/sounds/nope3.wav")
 export default {
   components: {
     "finished": Finished,
@@ -234,8 +242,12 @@ export default {
       if (this.$store.state.level === 'easy')
         tag = "reg"
 
-      else if(this.$store.state.level === 'medium'|| this.$store.state.level === 'hard')
+      else if(this.$store.state.level === 'medium')
         tag = "pix"
+
+      else if (this.$store.state.level === 'hard')
+        tag = "inverted"
+
       const imageMap = randomImageMap
       const keys = Array.from(imageMap.keys())
       const buildingName = keys.random()
