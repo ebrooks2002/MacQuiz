@@ -339,9 +339,8 @@ export default {
         if (btn.className === 'correct') {
           this.score += this.timerCount
 
-          if (this.score%7==0) {
-            rightAnswer2.play()}
-          else rightAnswer.play()
+          rightAnswer.play()
+          rightAnswer.currentTime=0
 
           return
         }
