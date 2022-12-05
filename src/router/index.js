@@ -9,12 +9,12 @@ import Home from '../views/Home.vue'
 import Game from '../views/Game.vue'
 
 const routes = [
-  { path: '/', component: Home },
-  { path: '/game', component: Game },
+    { path: '/', component: Home },
+    { path: '/game', component: Game },
 ]
 const router = createRouter({
     history: createWebHashHistory(),
     routes,
-  })
+})
 
 export default router

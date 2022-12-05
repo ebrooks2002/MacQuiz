@@ -20,7 +20,7 @@
     </div>
     <div class = "flexBox" id="options">
       <div id="info" >
-        Score:{{ score }}
+        Score:{{ score }} <span id="lives">Lives: {{lives}}</span>
       </div>
       <div class="timerInfo" id="timer">
                  <span id="points"> {{timerCount}}</span>
@@ -33,7 +33,7 @@
       <v-button id="option2" :onclick="optionBtn"  :option= "options[1]" class="non" :disabled="display"></v-button>
       <v-button id="option3" :onclick="optionBtn"  :option= "options[2]" class="non" :disabled="display"></v-button>
       <v-button id="option4" :onclick="optionBtn"  :option= "options[3]" class="non" :disabled="display"></v-button>
-      <div id = "lives"> lives: {{lives}}</div>
+<!--      <div id = "lives"> lives: {{lives}}</div>-->
     </div>
     <button v-if="display" v-on:click="nextClick()" id="next"> Next</button>
   </div>
@@ -150,6 +150,7 @@ export default {
     }
   },
   mounted() {
+    console.log(this.$store.state.level)
     this.picsUsed = []
     this.image = this.randomImg()
     this.options[0], this.options[1], this.options[2], this.options[3] = this.randomOption2()
@@ -217,16 +218,21 @@ export default {
     randomImg: function () {
       let tag = ""
       let randomImageMap = this.imageMap
-      switch (Math.floor(Math.random() * 2)) {
-        case 0:
-          // randomImageMap = this.imageMap
-          tag = "reg"
-          break
-        case 1:
-          // randomImageMap = this.pixelImageMap
-          tag = "pix"
-          // break
-      }
+      // switch (Math.floor(Math.random() * 2)) {
+      //   case this.$store.state.level === 'easy':
+      //     // randomImageMap = this.imageMap
+      //     tag = "reg"
+      //     break
+      //   case this.$store.state.level === 'medium'|| this.$store.state.level === 'hard':
+      //     // randomImageMap = this.pixelImageMap
+      //     tag = "pix"
+      //     // break
+      // }
+      if (this.$store.state.level === 'easy')
+        tag = "reg"
+
+      else if(this.$store.state.level === 'medium'|| this.$store.state.level === 'hard')
+        tag = "pix"
       const imageMap = randomImageMap
       const keys = Array.from(imageMap.keys())
       const buildingName = keys.random()
@@ -235,10 +241,10 @@ export default {
       const randomImageName = buildingPicutresList[randomImageIndex]
       const path = "src/assets/images/"
       const img = path + tag + "/" + buildingName + "/" + randomImageName + ".jpg"
-      console.log("----------------Break---------------------")
-      console.log(img)
-      console.log(this.picsUsed)
-      console.log(!this.picsUsed.includes(img))
+      // console.log("----------------Break---------------------")
+      // console.log(img)
+      // console.log(this.picsUsed)
+      // console.log(!this.picsUsed.includes(img))
       if (!this.picsUsed.includes(img)) {
         // console.log(img)
         this.picsUsed.push(img)
@@ -385,7 +391,7 @@ Array.prototype.random = function () { // returns radom item in an array
   padding: 5px
 }
 #info{
-  width: 100%;
+  text-align: center;
   height: 70px;
   box-sizing: border-box;
   font-size: 45px;
@@ -418,8 +424,9 @@ img{
   flex-wrap: wrap;
   align-content: stretch;
   flex-shrink: calc(0);
-  max-height: 500px;
-
+  padding: 0px;
+  margin-bottom: 0px;
+  margin-top: 5px;
 }
 button{
   width: 21vmax;
@@ -560,8 +567,8 @@ button{
 }
 
 #lives{
-  margin: auto;
-  font-size: 30px;
+  margin-left: 5px;
+  /*font-size: 30px;*/
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
