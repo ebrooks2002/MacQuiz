@@ -1,7 +1,4 @@
 <template>
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-  </head>
   <div class="navBar">
     <router-link id="homeBtn" to="/"><img alt="FunQuizGame Logo" class="logo" src="src/assets/images/logo-test.png"/></router-link>
     <router-link id="homeBtn" to="/">FunQuizGame</router-link>
@@ -33,7 +30,6 @@
       <v-button id="option2" :onclick="optionBtn"  :option= "options[1]" class="non" :disabled="display"></v-button>
       <v-button id="option3" :onclick="optionBtn"  :option= "options[2]" class="non" :disabled="display"></v-button>
       <v-button id="option4" :onclick="optionBtn"  :option= "options[3]" class="non" :disabled="display"></v-button>
-<!--      <div id = "lives"> lives: {{lives}}</div>-->
     </div>
     <button v-if="display" v-on:click="nextClick()" id="next"> Next</button>
   </div>
@@ -150,7 +146,6 @@ export default {
     }
   },
   mounted() {
-    console.log(this.$store.state.level)
     this.picsUsed = []
     this.image = this.randomImg()
     this.options[0], this.options[1], this.options[2], this.options[3] = this.randomOption2()
@@ -181,6 +176,7 @@ export default {
       this.nextClick()
     },
     optionBtn: function (event) {
+      cd.pause()
 
       this.showCorrectAnswer()
       this.display = !this.display
@@ -194,6 +190,7 @@ export default {
 
 
     },
+
     toggleDisplay: function () {
       this.display = !this.display
     },
@@ -216,6 +213,12 @@ export default {
       return arr
     },
     randomImg: function () {
+
+      cd.currentTime=0
+      cd.play()
+      wrongAnswer3.pause()
+      wrongAnswer3.currentTime=0
+
       let tag = ""
       let randomImageMap = this.imageMap
       // switch (Math.floor(Math.random() * 2)) {
@@ -254,6 +257,7 @@ export default {
       }
     },
     nextClick: function () {
+      click.play()
       document.querySelector("#timerVisual").className = ''
       document.querySelector('#timerVisual').offsetWidth
       this.toggleDisplay()
@@ -322,10 +326,25 @@ export default {
         let btn = document.getElementById(this.clickedBtn)
         if (btn.className === 'correct') {
           this.score += this.timerCount
+
+          if (this.score%7==0) {
+            rightAnswer2.play()}
+          else rightAnswer.play()
+
           return
         }
       }
       this.lives--
+      switch (this.lives){
+        case 2:
+          wrongAnswer.play()
+          break
+        case 1:
+          wrongAnswer2.play()
+          break
+        case 0:
+          wrongAnswer3.play()
+      }
     },
 
     start() {
@@ -412,7 +431,12 @@ Array.prototype.random = function () { // returns radom item in an array
   border-style: dashed;
   border-width: 3px;
   border-color: rgb(0, 0, 0);
-  flex-shrink:calc(0)
+  flex-shrink:calc(0);
+
+  animation: bounce;
+  animation-duration: 2s;
+  animation-iteration-count: 1;
+  /* animation-delay:4s; */
 }
 img{
   width: auto;
@@ -455,10 +479,9 @@ button{
 #timer{
   position: relative;
   height: 19px;
-  width: 440px;
+  width: 90%;
   border: 10px solid #f4a261;
   border-radius: 15px;
-  margin-left: 5px;
   /*padding-left: 20px;*/
   /*margin-left: 10px;*/
   /*margin-top: 10px;*/

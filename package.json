@@ -8,10 +8,11 @@
   },
   "dependencies": {
     "@cloudinary/url-gen": "^1.8.6",
+    "animate.css": "^4.1.1",
     "bootstrap": "^5.2.2",
     "bootstrap-vue": "^2.23.1",
     "exif-js": "^2.3.0",
-    "firebase": "^9.12.1",
+    "firebase": "^9.14.0",
     "imagvue": "^0.0.5",
     "localforage": "^1.10.0",
     "operator": "^1.8.0",
