@@ -43,6 +43,7 @@
             v-slot="{ navigate }">
           <button
               @click="navigate"
+              @click.native = 'test'
               role="link">
             Home</button>
         </router-link>
