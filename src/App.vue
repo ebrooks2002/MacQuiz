@@ -2,9 +2,18 @@
 import TheNavigation from '@/components/TheNavigation.vue'
 // import VButton from "src/views/components/VButton";
 export default{
-  components: {TheNavigation}
+  components: {TheNavigation},
+  methods:{
+    stopAllSounds : function(){
+      cd.pause()
+      cd.currentTime=0
+      wrongAnswer3.pause()
+      wrongAnswer3.currentTime=0
+    }
+  }
 }
 import "animate.css"
+
 </script>
 
 <template>

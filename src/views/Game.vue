@@ -1,7 +1,7 @@
 <template>
   <div class="navBar">
-    <router-link id="homeBtn" to="/"><img alt="FunQuizGame Logo" class="logo" src="src/assets/images/logo-test.png"/></router-link>
-    <router-link id="homeBtn" to="/">FunQuizGame</router-link>
+    <router-link id="homeBtn" to="/" @click.native = "test"><img alt="FunQuizGame Logo" class="logo" src="src/assets/images/logo-test.png"/></router-link>
+    <router-link id="homeBtn" to="/" @click.native = "test">FunQuizGame</router-link>
   </div>
   <div class="container">
     <finished
@@ -163,6 +163,13 @@ export default {
 
   },
   methods: {
+    stopAllSounds : function(){
+      cd.pause()
+      cd.currentTime=0
+      wrongAnswer3.pause()
+      wrongAnswer3.currentTime=0
+    },
+
     toggleScoreSavedTrue: function () {
       this.scoreSaved = true
     },
@@ -339,9 +346,8 @@ export default {
         if (btn.className === 'correct') {
           this.score += this.timerCount
 
-          if (this.score%7==0) {
-            rightAnswer2.play()}
-          else rightAnswer.play()
+          rightAnswer.play()
+          rightAnswer.currentTime=0
 
           return
         }

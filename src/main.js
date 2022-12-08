@@ -1,6 +1,7 @@
 import{ createApp } from 'vue'
 import App from './App.vue'
 import router from "@/router"
+
 import Vuex from "vuex";
 import VuexPersistence from 'vuex-persist';
 import localForage from 'localforage';
