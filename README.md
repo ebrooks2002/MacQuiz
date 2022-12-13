@@ -1,8 +1,6 @@
 # MacQuiz
 
-This template should help get you started developing with Vue 3 in Vite.
-
-See also our documentation [Doc](https://docs.google.com/document/d/1xVxX1AHvNtOLz8CKHalPwfjRNvNRhsGNkjLP2QVzw_0/edit?usp=sharing).
+MacQuiz is a web-based quiz that tests your knowledge of Macalester College's campus by displaying a random image and the user having to guess where it is. It is made with Vue 3 as well as other libraries that are mentioned later in the README. 
 
 ## Recommended IDE Setup
 
