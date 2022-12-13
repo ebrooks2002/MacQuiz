@@ -15,7 +15,12 @@ See [Vite Configuration Reference](https://vitejs.dev/config/).
 ## Project Setup
 
 ```sh
-npm install
+Install:
+  vue 3.2.38
+  vuex 4.0.2
+  vuex-persist 3.1.3
+  firebase 9.14.0
+  animate.css 4.1.1
 ```
 
 ### Compile and Hot-Reload for Development
