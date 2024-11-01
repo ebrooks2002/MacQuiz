@@ -1,6 +1,6 @@
 <template>
   <div class="navBar">
-    <router-link id="homeBtn" to="/" @click.native = "test"><img alt="FunQuizGame Logo" class="logo" src="src/assets/images/logo-test.png"/></router-link>
+    <router-link id="homeBtn" to="/" @click.native = "test"><img alt="FunQuizGame Logo" class="logo" src="/src/assets/images/logo-test.png"/></router-link>
     <router-link id="homeBtn" to="/" @click.native = "test">FunQuizGame</router-link>
   </div>
   <div class="container">
