@@ -1,4 +1,5 @@
 # MacQuiz
+You can visit the website here: https://ebrooks2002.github.io/MacQuiz/
 
 MacQuiz is a web-based quiz that tests your knowledge of Macalester College's campus by displaying a random image and the user having to guess where it is. It is made with Vue 3 as well as other libraries that are mentioned later in the README. 
 
