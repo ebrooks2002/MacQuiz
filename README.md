@@ -2,11 +2,12 @@
 You can visit the website here: https://ebrooks2002.github.io/MacQuiz/
 
 The MacQuiz game is a Vue.js-based web application where players test their familiarity with Macalester College's campus by guessing the location depicted in various images. Players choose from three difficulty levels—easy, medium, or hard—which affect the appearance of each image. At the easy level, images are shown in their original form. For the medium level, images undergo pixelation to make identification harder. At the hard level, images are both pixelated and color-inverted, introducing an additional layer of visual complexity. Each image is accompanied by four answer options, one of which is correct, presented in a randomized order each round.
-
+### Homepage
 <img width="700" alt="Screen Shot 2024-11-05 at 11 43 19 AM" src="https://github.com/user-attachments/assets/aa48ed1c-6062-451a-b44b-41fec70d4c1d">
 
-
+### Gameplay
 Players have a 10-second time limit for each guess, with a color-coded countdown visualized through the timerColor data property in Vue. As time runs out, the color gradually changes. The core game logic maintains responsive feedback loops—each guess is immediately evaluated, and the score updates accordingly. Correct answers add points, while incorrect answers decrease the player’s lives. When a player’s lives reach zero, a “game over” state is triggered via the buttonTrigger flag, displaying a popup that blocks further gameplay actions.
+<img width="700" alt="Screen Shot 2024-11-05 at 11 49 28 AM" src="https://github.com/user-attachments/assets/aac68c74-dc25-4300-a122-9a823cd0bf08">
 
 The app’s audio feedback system, integrated within the game’s logic, plays unique sound effects in response to correct answers, incorrect answers, countdown status, and game-over conditions. This auditory feedback is managed through Vue’s conditional rendering, which ensures that sounds align precisely with player actions and on-screen events. Additionally, for smooth game flow, the resetGame function resets data properties—including score, lives, image selection, and timer—to restart the game without requiring a page reload.
 
