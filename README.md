@@ -1,9 +1,13 @@
 # MacQuiz
 You can visit the website here: https://ebrooks2002.github.io/MacQuiz/
 
-MacQuiz is a web-based quiz game where players are shown images of Macalester College’s campus and must guess where they were taken. Players can select between easy, medium, or hard difficulty. For easy difficulty, the images aren’t manipulated; for medium difficulty, they are pixelated; for hard, they are both pixelated and color-inverted. Players get 10 seconds to make a guess. Players have 3 lives, meaning that once they get three answers wrong, they lose. Once players lose, they can enter a username, and their score will be kept on a leaderboard. The game includes sound effects for when a player gets an answer wrong or right, for the timer, and for when a player loses.
+The MacQuiz game is a Vue.js-based web application where players test their familiarity with Macalester College's campus by guessing the location depicted in various images. Players choose from three difficulty levels—easy, medium, or hard—which affect the appearance of each image. At the easy level, images are shown in their original form. For the medium level, images undergo pixelation to make identification harder. At the hard level, images are both pixelated and color-inverted, introducing an additional layer of visual complexity. Each image is accompanied by four answer options, one of which is correct, presented in a randomized order each round.
 
-It is made with Vue 3 as well as other libraries that are mentioned later in the README. 
+Players have a 10-second time limit for each guess, with a color-coded countdown visualized through the timerColor data property in Vue. As time runs out, the color gradually changes. The core game logic maintains responsive feedback loops—each guess is immediately evaluated, and the score updates accordingly. Correct answers add points, while incorrect answers decrease the player’s lives. When a player’s lives reach zero, a “game over” state is triggered via the buttonTrigger flag, displaying a popup that blocks further gameplay actions.
+
+The app’s audio feedback system, integrated within the game’s logic, plays unique sound effects in response to correct answers, incorrect answers, countdown status, and game-over conditions. This auditory feedback is managed through Vue’s conditional rendering, which ensures that sounds align precisely with player actions and on-screen events. Additionally, for smooth game flow, the resetGame function resets data properties—including score, lives, image selection, and timer—to restart the game without requiring a page reload.
+
+When the game is over, players have the option to enter their username and record their score on a leaderboard. The leaderboard and scoring mechanics are implemented as part of the stateful data managed by Vue, which tracks user performance and preserves their scores across sessions. 
 
 ## Recommended IDE Setup
 
