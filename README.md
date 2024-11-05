@@ -10,14 +10,18 @@ The MacQuiz game is a Vue.js-based web application where players test their fami
 ### Gameplay
 <img width="700" alt="Screen Shot 2024-11-05 at 11 49 28 AM" src="https://github.com/user-attachments/assets/aac68c74-dc25-4300-a122-9a823cd0bf08">
 
-. Players have a 10-second time limit for each guess, with a color-coded countdown visualized through the timerColor data property in Vue.
-. As time runs out, the color gradually changes. The core game logic maintains responsive feedback loops—each guess is immediately evaluated, and the score updates accordingly. 
-. Correct answers add points, while incorrect answers decrease the player’s lives.
-. When a player’s lives reach zero, a “game over” state is triggered via the buttonTrigger flag, displaying a popup that blocks further gameplay actions.
+- Players have a 10-second time limit for each guess, with a color-coded countdown visualized through the timerColor data property in Vue.
+- As time runs out, the color gradually changes. The core game logic maintains responsive feedback loops—each guess is immediately evaluated, and the score updates accordingly. 
+- Correct answers add points, while incorrect answers decrease the player’s lives.
+- When a player’s lives reach zero, a “game over” state is triggered via the buttonTrigger flag, displaying a popup that blocks further gameplay actions.
 
+### Audio
 The app’s audio feedback system, integrated within the game’s logic, plays unique sound effects in response to correct answers, incorrect answers, countdown status, and game-over conditions. This auditory feedback is managed through Vue’s conditional rendering, which ensures that sounds align precisely with player actions and on-screen events. Additionally, for smooth game flow, the resetGame function resets data properties—including score, lives, image selection, and timer—to restart the game without requiring a page reload.
 
+### Leaderboard
 When the game is over, players have the option to enter their username and record their score on a leaderboard. The leaderboard and scoring mechanics are implemented as part of the stateful data managed by Vue, which tracks user performance and preserves their scores across sessions. 
+
+<img width="700" alt="Screen Shot 2024-11-05 at 11 59 16 AM" src="https://github.com/user-attachments/assets/dcf3a179-4e34-4e5b-8461-41541f5e70fd">
 
 ## Recommended IDE Setup
 
