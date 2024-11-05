@@ -5,10 +5,10 @@ You can visit the website here: https://ebrooks2002.github.io/MacQuiz/
 The MacQuiz game is a Vue.js-based web application where players test their familiarity with Macalester College's campus by guessing the location depicted in various images. Players choose from three difficulty levels—easy, medium, or hard—which affect the appearance of each image. At the easy level, images are shown in their original form. For the medium level, images undergo pixelation to make identification harder. At the hard level, images are both pixelated and color-inverted, introducing an additional layer of visual complexity. Each image is accompanied by four answer options, one of which is correct, presented in a randomized order each round.
 
 ### Homepage
-<img width="700" alt="Screen Shot 2024-11-05 at 11 43 19 AM" src="https://github.com/user-attachments/assets/aa48ed1c-6062-451a-b44b-41fec70d4c1d">
+<img width="500" alt="Screen Shot 2024-11-05 at 11 43 19 AM" src="https://github.com/user-attachments/assets/aa48ed1c-6062-451a-b44b-41fec70d4c1d">
 
 ### Gameplay
-<img width="700" alt="Screen Shot 2024-11-05 at 11 49 28 AM" src="https://github.com/user-attachments/assets/aac68c74-dc25-4300-a122-9a823cd0bf08">
+<img width="500" alt="Screen Shot 2024-11-05 at 11 49 28 AM" src="https://github.com/user-attachments/assets/aac68c74-dc25-4300-a122-9a823cd0bf08">
 
 - Players have a 10-second time limit for each guess, with a color-coded countdown visualized through the timerColor data property in Vue.
 - As time runs out, the color gradually changes. The core game logic maintains responsive feedback loops—each guess is immediately evaluated, and the score updates accordingly. 
@@ -21,7 +21,7 @@ The app’s audio feedback system, integrated within the game’s logic, plays u
 ### Leaderboard
 When the game is over, players have the option to enter their username and record their score on a leaderboard. The leaderboard and scoring mechanics are implemented as part of the stateful data managed by Vue, which tracks user performance and preserves their scores across sessions. 
 
-<img width="700" alt="Screen Shot 2024-11-05 at 11 59 16 AM" src="https://github.com/user-attachments/assets/dcf3a179-4e34-4e5b-8461-41541f5e70fd">
+<img width="500" alt="Screen Shot 2024-11-05 at 11 59 16 AM" src="https://github.com/user-attachments/assets/dcf3a179-4e34-4e5b-8461-41541f5e70fd">
 
 ## Recommended IDE Setup
 
